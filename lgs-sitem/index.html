@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>LGS Yazılı Hazırlık</title>
+    <style>
+        /* CSS BURADA */
+        body { font-family: sans-serif; text-align: center; background-color: #f0f2f5; margin: 0; }
+        header { background: #ff5722; color: white; padding: 30px; }
+        #countdown { font-size: 24px; font-weight: bold; color: #d32f2f; margin: 20px; }
+        .kutu { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LGS Yazılı Hazırlık Merkezi</h1>
+        <div id="countdown">Hesaplanıyor...</div>
+    </header>
+
+    <div class="kutu">
+        <h2>Yazılı Dosyaları</h2>
+        <p>Dosyalar çok yakında yüklenecek.</p>
+    </div>
+<div class="kutu">
+    <h2>Yazılı Dosyaları</h2>
+    <p>8. Sınıf Matematik 1. Dönem 1. Yazılı Hazırlık Soruları</p>
+
+    <a href="8.sınıfmatematikyazılısı.pdf" style="background-color: #ff5722; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;" download>
+        📥 Yazılıyı İndir (PDF)
+    </a>
+</div>
+    <script>
+        // JAVASCRIPT BURADA
+        var lgsTarihi = new Date("June 7, 2026 09:30:00").getTime();
+        setInterval(function() {
+            var simdi = new Date().getTime();
+            var fark = lgsTarihi - simdi;
+            var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+            var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+            var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = gun + " Gün " + saat + " Saat " + dakika + " Dakika " + saniye + " Saniye ";
+        }, 1000);
+    </script>
+</body>
+</html>
