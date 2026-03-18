@@ -1,49 +1,113 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<title>LGS Hazırlık Notları | Yazılı-Zone</title> 
-<meta name="description" content="LGS sınavına hazırlanan öğrenciler için en güncel ders notları ve çalışma programları.">
     <meta charset="UTF-8">
-    <title>LGS Yazılı Hazırlık</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>LGS Hazırlık Notları | Yazılı-Zone</title>
+    <meta name="description" content="LGS sınavına hazırlanan öğrenciler için en güncel ders notları, çalışma programları ve PDF kaynaklar.">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <style>
-        /* CSS BURADA */
-        body { font-family: sans-serif; text-align: center; background-color: #f0f2f5; margin: 0; }
-        header { background: #ff5722; color: white; padding: 30px; }
-        #countdown { font-size: 24px; font-weight: bold; color: #d32f2f; margin: 20px; }
-        .kutu { background: white; padding: 20px; border-radius: 10px; display: inline-block; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        /* Tasarım Ayarları */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #f0f2f5; 
+            margin: 0; 
+            padding-bottom: 50px;
+        }
+        header { 
+            background: #ff5722; 
+            color: white; 
+            padding: 40px 20px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { margin: 0; font-size: 28px; }
+        
+        #countdown { 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #d32f2f; 
+            margin: 25px auto;
+            background: #ffebee;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 50px;
+            border: 2px solid #ffcdd2;
+        }
+
+        .kutu { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 15px; 
+            display: block; 
+            margin: 20px auto; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            width: 90%; 
+            max-width: 600px; 
+        }
+        
+        h2 { color: #333; margin-top: 0; }
+        p { color: #666; line-height: 1.6; }
+
+        .buton { 
+            background-color: #ff5722; 
+            color: white; 
+            padding: 14px 25px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            display: inline-block; 
+            font-weight: bold; 
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .buton:hover { background-color: #e64a19; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>LGS Yazılı Hazırlık Merkezi</h1>
-        <div id="countdown">Hesaplanıyor...</div>
+        <p>Yazılı-Zone ile Sınavlara Tam Destek!</p>
     </header>
 
-    <div class="kutu">
-        <h2>Yazılı Dosyaları</h2>
-        <p>Dosyalar çok yakında yüklenecek.</p>
-    </div>
-<div class="kutu">
-    <h2>Yazılı Dosyaları</h2>
-    <p>8. Sınıf Matematik 1. Dönem 1. Yazılı Hazırlık Soruları</p>
+    <div id="countdown">LGS Sayacı Yükleniyor...</div>
 
-    <a href="8.sınıfmatematikyazılısı.pdf" style="background-color: #ff5722; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold;" download>
-        📥 Yazılıyı İndir (PDF)
-    </a>
-</div>
+    <div class="kutu">
+        <h2>📚 Güncel Duyurular</h2>
+        <p>Yeni nesil çalışma notları ve deneme sınavları çok yakında burada paylaşılacaktır. Takipte kalın!</p>
+    </div>
+
+    <div class="kutu">
+        <h2>📝 8. Sınıf Materyalleri</h2>
+        <p><b>8. Sınıf Matematik 1. Dönem 1. Yazılı Hazırlık Soruları</b><br>
+        Müfredata uygun, yeni nesil sorulardan oluşan PDF dosyasını aşağıdan indirebilirsiniz.</p>
+        <a href="8.sınıfmatematikyazılısı.pdf" class="icon-link buton" download>📩 PDF Dosyasını İndir</a>
+    </div>
+
     <script>
-        // JAVASCRIPT BURADA
+        // LGS Tarihi: 7 Haziran 2026 Saat 09:30
         var lgsTarihi = new Date("June 7, 2026 09:30:00").getTime();
-        setInterval(function() {
+
+        var x = setInterval(function() {
             var simdi = new Date().getTime();
             var fark = lgsTarihi - simdi;
+
             var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
             var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
             var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-            document.getElementById("countdown").innerHTML = gun + " Gün " + saat + " Saat " + dakika + " Dakika " + saniye + " Saniye ";
+
+            document.getElementById("countdown").innerHTML = "⏳ LGS'ye Kalan Süre: " + gun + " Gün " + saat + " Saat " + dakika + " Dakika " + saniye + " Saniye ";
+
+            if (fark < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "LGS Başladı veya Geçti!";
+            }
         }, 1000);
     </script>
+
 </body>
 </html>
