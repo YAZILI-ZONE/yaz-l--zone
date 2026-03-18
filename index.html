@@ -3,111 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>LGS Hazırlık Notları | Yazılı-Zone</title>
-    <meta name="description" content="LGS sınavına hazırlanan öğrenciler için en güncel ders notları, çalışma programları ve PDF kaynaklar.">
-    
-    <link rel="icon" type="image/png" href="favicon.png">
-
+    <title>Yazılı-Zone | LGS Hazırlık</title>
     <style>
-        /* Tasarım Ayarları */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            text-align: center; 
-            background-color: #f0f2f5; 
-            margin: 0; 
-            padding-bottom: 50px;
-        }
-        header { 
-            background: #ff5722; 
-            color: white; 
-            padding: 40px 20px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 { margin: 0; font-size: 28px; }
-        
-        #countdown { 
-            font-size: 22px; 
-            font-weight: bold; 
-            color: #d32f2f; 
-            margin: 25px auto;
-            background: #ffebee;
-            padding: 15px;
-            display: inline-block;
-            border-radius: 50px;
-            border: 2px solid #ffcdd2;
-        }
-
-        .kutu { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 15px; 
-            display: block; 
-            margin: 20px auto; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            width: 90%; 
-            max-width: 600px; 
-        }
-        
-        h2 { color: #333; margin-top: 0; }
-        p { color: #666; line-height: 1.6; }
-
-        .buton { 
-            background-color: #ff5722; 
-            color: white; 
-            padding: 14px 25px; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            display: inline-block; 
-            font-weight: bold; 
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-        .buton:hover { background-color: #e64a19; }
+        body { font-family: sans-serif; text-align: center; background: #f4f4f4; margin: 0; padding: 20px; }
+        header { background: #ff5722; color: white; padding: 20px; border-radius: 10px; }
+        .kutu { background: white; margin: 20px auto; padding: 20px; border-radius: 10px; max-width: 600px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; }
+        .buton { background: #ff5722; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; text-decoration: none; display: inline-block; }
+        .cevap-btn { background: #333; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .soru-alani { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>LGS Yazılı Hazırlık Merkezi</h1>
-        <p>Yazılı-Zone ile Sınavlara Tam Destek!</p>
-    </header>
+<header>
+    <h1>Yazılı-Zone Hazırlık Merkezi</h1>
+    <p>Sınava Hazırlanmanın En Eğlenceli Yolu</p>
+</header>
 
-    <div id="countdown">LGS Sayacı Yükleniyor...</div>
+<div class="kutu" style="text-align:center;">
+    <h2>🎯 Günün Sorusu</h2>
+    <p>Sınıfını Seç:</p>
+    <button class="buton" onclick="goster('s8')">8. Sınıf</button>
+    <button class="buton" onclick="alert('Yakında eklenecek!')">Diğer Sınıflar</button>
 
-    <div class="kutu">
-        <h2>📚 Güncel Duyurular</h2>
-        <p>Yeni nesil çalışma notları ve deneme sınavları çok yakında burada paylaşılacaktır. Takipte kalın!</p>
+    <div id="s8" class="soru-alani">
+        <h3 style="color:#ff5722;">8. Sınıf 2. Dönem Matematik</h3>
+        
+        <p><b>Soru 1:</b> 2x + 5 = 15 ise x kaçtır?</p>
+        <button class="cevap-btn" onclick="this.style.background='green'; alert('Doğru!')">5</button>
+        <button class="cevap-btn" onclick="this.style.background='red'; alert('Yanlış!')">10</button>
+
+        <p><b>Soru 2:</b> Hangisi bir doğrusal denklem grafiğidir?</p>
+        <button class="cevap-btn" onclick="alert('Doğru!')">y = 2x + 1</button>
+        <button class="cevap-btn" onclick="alert('Yanlış!')">y = x²</button>
     </div>
+</div>
 
-    <div class="kutu">
-        <h2>📝 8. Sınıf Materyalleri</h2>
-        <p><b>8. Sınıf Matematik 1. Dönem 1. Yazılı Hazırlık Soruları</b><br>
-        Müfredata uygun, yeni nesil sorulardan oluşan PDF dosyasını aşağıdan indirebilirsiniz.</p>
-        <a href="8-sinif-matematik.pdf" class="buton" download>📩 PDF Dosyasını İndir</a>
-    </div>
+<div class="kutu" style="text-align:center;">
+    <h2>📚 Kaynaklar</h2>
+    <a href="8.sınıfmatematikyazılısı.pdf" class="buton" download>PDF İndir</a>
+</div>
 
-    <script>
-        // LGS Tarihi: 7 Haziran 2026 Saat 09:30
-        var lgsTarihi = new Date("June 7, 2026 09:30:00").getTime();
-
-        var x = setInterval(function() {
-            var simdi = new Date().getTime();
-            var fark = lgsTarihi - simdi;
-
-            var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-            var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
-            var saniye = Math.floor((fark % (1000 * 60)) / 1000);
-
-            document.getElementById("countdown").innerHTML = "⏳ LGS'ye Kalan Süre: " + gun + " Gün " + saat + " Saat " + dakika + " Dakika " + saniye + " Saniye ";
-
-            if (fark < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").innerHTML = "LGS Başladı veya Geçti!";
-            }
-        }, 1000);
-    </script>
+<script>
+    function goster(id) {
+        document.getElementById(id).style.display = 'block';
+    }
+</script>
 
 </body>
 </html>
