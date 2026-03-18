@@ -11,32 +11,32 @@
         header { background: var(--turuncu); color: white; padding: 35px 20px; text-align: center; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .menu-icon { font-size: 35px; cursor: pointer; position: absolute; left: 25px; top: 25px; }
 
-        /* YAN MENÜ (HAMBURGER) */
+        /* YAN MENÜ */
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: var(--koyu); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: white; display: block; margin: 5px 15px; border-radius: 8px; text-align: center; font-weight: bold; background: var(--yesil); }
-        .sidebar .kategori-baslik { color: #aaa; font-size: 12px; text-align: center; margin-top: 20px; text-transform: uppercase; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: white; display: block; margin: 5px 15px; border-radius: 8px; text-align: center; font-weight: bold; background: var(--yesil); transition: 0.3s; }
+        .sidebar a:hover { background: #27ae60; }
+        .sidebar .kategori-baslik { color: #aaa; font-size: 12px; text-align: center; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
 
         .ana-konteyner { display: flex; gap: 20px; padding: 25px; max-width: 1500px; margin: 0 auto; align-items: flex-start; }
         .sutun { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 20px; box-sizing: border-box; }
         
-        /* SÜTUN GENİŞLİKLERİ */
         .sol { flex: 1; min-width: 280px; border-top: 5px solid var(--yesil); }
         .orta { flex: 2; min-width: 450px; border-top: 5px solid var(--turuncu); min-height: 550px; }
         .sag { flex: 1; min-width: 280px; border-top: 5px solid var(--mavi); }
 
         .btn { display: block; width: 100%; padding: 12px; margin-bottom: 8px; border: none; border-radius: 8px; color: white; font-weight: bold; text-align: center; text-decoration: none; cursor: pointer; transition: 0.3s; font-size: 13px; }
         .btn-not { background: var(--yesil); }
-        .btn-not:hover { filter: brightness(0.9); transform: translateX(5px); }
-        .btn-test-git { background: #ef5350; font-size: 16px; margin-top: 20px; padding: 15px; }
+        .btn-not:hover { transform: translateX(5px); filter: brightness(0.9); }
+        .btn-test-git { background: #ef5350; font-size: 16px; margin-top: 20px; padding: 15px; box-shadow: 0 4px 10px rgba(239, 83, 80, 0.3); }
 
         /* TEST SİSTEMİ */
         #test-ekrani { display: none; }
         .soru-kapsayici { background: #fdfdfd; padding: 20px; border-radius: 12px; border: 1px solid #eee; margin: 20px 0; }
-        .secenek { display: block; padding: 12px; margin: 8px 0; background: white; border: 2px solid #eee; border-radius: 10px; cursor: pointer; }
-        .secenek:hover { border-color: var(--turuncu); }
+        .secenek { display: block; padding: 12px; margin: 8px 0; background: white; border: 2px solid #eee; border-radius: 10px; cursor: pointer; transition: 0.2s; }
+        .secenek:hover { border-color: var(--turuncu); background: #fff9f5; }
         
-        .duyuru-panosu { background: #fffbf0; border: 1px dashed var(--turuncu); padding: 15px; border-radius: 10px; margin-top: 15px; }
-        .buyuk-sayi { font-size: 35px; font-weight: bold; color: var(--turuncu); }
+        .duyuru-panosu { background: #fffbf0; border: 1px dashed var(--turuncu); padding: 15px; border-radius: 10px; margin-top: 15px; line-height: 1.6; }
+        .buyuk-sayi { font-size: 40px; font-weight: bold; color: var(--turuncu); line-height: 1; }
 
         @media (max-width: 1100px) { .ana-konteyner { flex-direction: column; } .sutun { width: 100%; } }
     </style>
@@ -45,18 +45,19 @@
 
 <div id="mySidebar" class="sidebar">
     <span onclick="closeNav()" style="position:absolute; top:10px; right:25px; font-size:36px; color:white; cursor:pointer;">&times;</span>
-    <div class="kategori-baslik">Hızlı Erişim</div>
+    <div class="kategori-baslik">Menü</div>
+    <a href="#" onclick="location.reload()">🏠 Ana Sayfa</a>
     <a href="#">📢 Duyurular</a>
     <a href="#">📝 Online Testler</a>
     <a href="#">📄 PDF Testler</a>
-    <div class="kategori-baslik">Destek</div>
-    <a href="mailto:yazizone@gmail.com" style="background:#e74c3c;">📧 İletişim</a>
+    <div class="kategori-baslik">İletişim</div>
+    <a href="mailto:yazizone@gmail.com" style="background:#e74c3c;">📧 E-Posta Gönder</a>
 </div>
 
 <header>
     <span class="menu-icon" onclick="openNav()">&#9776;</span>
     <h1>Yazılı-Zone Portal</h1>
-    <div id="lgs-baslik" style="font-size:14px; margin-top:10px; opacity:0.9;">Geri Sayım Başladı</div>
+    <div id="lgs-baslik" style="font-size:14px; margin-top:10px; opacity:0.9;">Yükleniyor...</div>
 </header>
 
 <div class="ana-konteyner">
@@ -84,15 +85,15 @@
         <div id="ana-panel">
             <h3>📢 Duyurular Panosu</h3>
             <div class="duyuru-panosu">
-                <p>✅ <b>Yeni:</b> 8. Sınıf 2. Dönem 1. Yazılı hazırlık soruları yüklendi.</p>
-                <p>✅ <b>Sistem:</b> LGS sayacı 14 Haziran 09:00'a göre güncellendi.</p>
-                <p>✅ <b>Dersler:</b> 5, 6, 7 ve 8. sınıf notları güncel müfredata uygundur.</p>
+                <p>✅ <b>Yeni Sınav:</b> 8. Sınıf Yazılı Örneği çözüme açıldı!</p>
+                <p>✅ <b>PDF Desteği:</b> Yazılı kağıdını sağ menüden indirebilirsiniz.</p>
+                <p>✅ <b>Müfredat:</b> Tüm notlar 2025-2026 dönemine uygundur.</p>
             </div>
             
-            <div style="margin-top:40px; text-align:center;">
+            <div style="margin-top:50px; text-align:center;">
                 <h3 style="color:var(--turuncu);">📝 Sınav Merkezi</h3>
-                <p>Yazılı hazırlık sınavına girmek için aşağıdaki butona tıkla.</p>
-                <button class="btn btn-test-git" onclick="sinavSecimGoster()">🚀 8. Sınıf 2. Dönem 1. Yazılı Türkçe Sınavına Git</button>
+                <p>Hazırsan online provaya başlayabilirsin.</p>
+                <button class="btn btn-test-git" onclick="sinavSecimGoster()">🚀 8. Sınıf Yazılı Örneğini Çöz</button>
             </div>
         </div>
 
@@ -105,7 +106,7 @@
         </div>
 
         <div id="sonuc-paneli" style="display:none; text-align:center; padding:50px;">
-            <h2 style="color:var(--yesil);">Sınav Bitti!</h2>
+            <h2 style="color:var(--yesil);">Tebrikler, Bitirdin!</h2>
             <p id="skor-yazi" style="font-size:20px;"></p>
             <button class="btn btn-not" onclick="location.reload()">Ana Sayfaya Dön</button>
         </div>
@@ -113,14 +114,15 @@
 
     <div class="sutun sag">
         <h3>📥 PDF Arşivi</h3>
-        <a href="yazili.pdf" class="btn" style="background:var(--yesil);" download>📄 Çalışma Kağıdını İndir</a>
-        <a href="#" class="btn" style="background:var(--mavi);">📄 Haftalık Program</a>
+        <p style="font-size: 13px;">Dosyayı cihazına indir:</p>
+        <a href="yazili.pdf" class="btn" style="background:var(--yesil);" download>📄 8. Sınıf Yazılı Örneği</a>
+        <a href="#" class="btn" style="background:var(--mavi);">📄 Haftalık Ders Programı</a>
 
-        <div style="text-align: center; margin-top: 40px; padding: 15px; background: #f9f9f9; border-radius: 10px;">
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f9f9f9; border-radius: 10px;">
             <h3>⏳ LGS Sayaç</h3>
             <div id="gun-sayi" class="buyuk-sayi">0</div>
-            <div style="font-size: 11px; color: #666; font-weight: bold;">GÜN : SAAT : DK : SN</div>
-            <div id="tam-zaman" style="font-size: 14px; margin-top: 5px; color: var(--koyu); font-family: monospace;"></div>
+            <div style="font-size: 11px; color: #666; font-weight: bold; margin-bottom:10px;">GÜN KALDI</div>
+            <div id="tam-zaman" style="font-size: 15px; color: var(--koyu); font-family: monospace; font-weight:bold;"></div>
         </div>
     </div>
 </div>
@@ -129,9 +131,11 @@
     function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
+    // SORULAR
     const sorular = [
-        { s: "1. 'Ağır' kelimesi hangisinde mecaz anlamdadır?", a: "Bu çuval çok ağır.", b: "Ağır sözler kalbimi kırdı.", c: "Ağır adımlarla yürüdü.", d: "Yemek çok ağırdı.", dgr: "b" },
-        { s: "2. Hangisi isim-fiil ekidir?", a: "-ma, -ış, -mak", b: "-an, -ası, -mez", c: "-ip, -erek, -ince", d: "-ar, -dik, -ecek", dgr: "a" }
+        { s: "1. 'Yol' kelimesi hangisinde mecaz anlamdadır?", a: "Bu yol çok engebeli.", b: "Sorunu çözmek için bir yol bulduk.", c: "Yolun kenarında çiçekler vardı.", d: "Uzun bir yola çıkacağız.", dgr: "b" },
+        { s: "2. Hangisi bir sıfat-fiildir?", a: "Koşarak", b: "Okumak", c: "Tanıdık (yüz)", d: "Gülünce", dgr: "c" },
+        { s: "3. Hangisinde yazım yanlışı yoktur?", a: "Herkez burada mı?", b: "Yarın ki maça gelecek mi?", c: "Türk Dil Kurumu'na gittik.", d: "Bir çok kitap okudu.", dgr: "c" }
     ];
 
     let aktifSoru = 0;
@@ -147,7 +151,7 @@
         const soru = sorular[aktifSoru];
         document.getElementById('soru-alani').innerHTML = `
             <div class="soru-kapsayici">
-                <p><b>Soru ${aktifSoru + 1}:</b> ${soru.s}</p>
+                <p style="font-size:18px;"><b>Soru ${aktifSoru + 1}:</b> ${soru.s}</p>
                 <label class="secenek"><input type="radio" name="sec" value="a"> A) ${soru.a}</label>
                 <label class="secenek"><input type="radio" name="sec" value="b"> B) ${soru.b}</label>
                 <label class="secenek"><input type="radio" name="sec" value="c"> C) ${soru.c}</label>
@@ -159,7 +163,7 @@
 
     function sonrakiSoru() {
         const secilen = document.querySelector('input[name="sec"]:checked');
-        if(!secilen) return alert("Lütfen bir şık seç!");
+        if(!secilen) return alert("Lütfen bir şık işaretle!");
         
         if(secilen.value === sorular[aktifSoru].dgr) dogru++;
 
@@ -173,12 +177,10 @@
         }
     }
 
-    // LGS SAYAÇ (GÜN VE SAAT DETAYLI)
+    // LGS SAYAÇ
     const hedef = new Date("June 14, 2026 09:00:00").getTime();
     setInterval(() => {
-        const simdi = new Date().getTime();
-        const fark = hedef - simdi;
-
+        const fark = hedef - new Date().getTime();
         const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
         const saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
@@ -186,7 +188,7 @@
 
         document.getElementById("gun-sayi").innerHTML = gun;
         document.getElementById("tam-zaman").innerHTML = `${saat}s : ${dakika}dk : ${saniye}sn`;
-        document.getElementById("lgs-baslik").innerHTML = `LGS 2026'ya ${gun} gün kaldı!`;
+        document.getElementById("lgs-baslik").innerHTML = `LGS 2026'ya ${gun} gün kaldı! Başarılar...`;
     }, 1000);
 </script>
 
