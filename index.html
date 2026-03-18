@@ -5,48 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yazılı Zone | Eğitim Portalı</title>
     <style>
-        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --beyaz: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; }
+        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --beyaz: #ffffff; --kirmizi: #e74c3c; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; }
         
         /* HEADER & HAMBURGER */
-        header { background: var(--turuncu); color: white; padding: 15px; text-align: center; position: relative; display: flex; align-items: center; justify-content: center; }
+        header { background: var(--turuncu); color: white; padding: 15px; text-align: center; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .hamburger { font-size: 30px; cursor: pointer; position: absolute; left: 20px; }
 
-        /* YAN MENÜ */
+        /* YAN MENÜ (SIDEBAR) */
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: var(--koyu); overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
         .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; }
         .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; cursor: pointer; }
 
-        /* ANA YAPI */
-        .container { display: flex; gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; }
-        .column { background: var(--beyaz); border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex: 1; min-width: 300px; }
-        .middle-col { flex: 2; }
+        /* ANA KONTEYNER */
+        .container { display: flex; gap: 20px; padding: 20px; max-width: 1450px; margin: 0 auto; flex-wrap: wrap; align-items: flex-start; }
+        .column { background: var(--beyaz); border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex: 1; min-width: 320px; box-sizing: border-box; }
+        .middle-col { flex: 2; border-top: 5px solid var(--turuncu); }
+        .left-col { border-top: 5px solid var(--yesil); }
+        .right-col { border-top: 5px solid var(--mavi); }
 
-        /* SOL SÜTUN: DERS NOTLARI SİSTEMİ */
-        .accordion-btn { background: var(--yesil); color: white; width: 100%; padding: 12px; border: none; border-radius: 6px; margin-top: 5px; cursor: pointer; text-align: left; font-weight: bold; }
-        .panel { display: none; padding: 10px; background: #f9f9f9; }
-        .sub-btn { background: #eee; border: none; width: 100%; padding: 8px; margin: 2px 0; cursor: pointer; text-align: left; font-size: 14px; }
-        .topic-link { display: block; padding: 5px 15px; font-size: 13px; color: #555; text-decoration: none; cursor: pointer; }
-        .topic-link:hover { color: var(--turuncu); }
+        /* SOL SÜTUN: AKORDİYON SİSTEMİ */
+        .sinif-btn { background: var(--yesil); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; text-align: left; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; transition: 0.3s; }
+        .sinif-btn:hover { background: #27ae60; }
+        
+        .ders-panel { display: none; padding: 5px 10px; background: #f0fdf4; border-radius: 0 0 8px 8px; margin-bottom: 10px; border: 1px solid #dcfce7; }
+        .ders-btn { background: #ffffff; border: 1px solid #e2e8f0; width: 100%; padding: 10px; margin: 5px 0; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; border-radius: 5px; display: flex; justify-content: space-between; }
+        
+        .konu-listesi { display: none; padding-left: 20px; padding-bottom: 10px; }
+        .konu-item { display: block; padding: 6px 0; font-size: 13px; color: #4a5568; text-decoration: none; cursor: pointer; border-bottom: 1px dashed #edf2f7; }
+        .konu-item:hover { color: var(--turuncu); font-weight: bold; }
 
         /* GÜNÜN SORUSU */
-        .gunun-sorusu { margin-top: 30px; padding: 15px; border: 2px solid var(--turuncu); border-radius: 10px; background: #fffdf0; }
-        .gunun-sorusu input { width: 100%; padding: 8px; margin-top: 10px; box-sizing: border-box; }
-        .check-btn { background: var(--turuncu); color: white; border: none; padding: 8px 15px; margin-top: 10px; cursor: pointer; width: 100%; border-radius: 5px; }
+        .gunun-sorusu { margin-top: 30px; padding: 15px; border: 2px solid var(--turuncu); border-radius: 12px; background: #fffcf0; }
+        .gunun-sorusu input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box; }
+        .check-btn { background: var(--turuncu); color: white; border: none; padding: 10px; margin-top: 10px; cursor: pointer; width: 100%; border-radius: 5px; font-weight: bold; }
 
-        /* ORTA SÜTUN */
-        .duyuru-box { border: 1px solid #ddd; border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+        /* DUYURULAR & TESTLER (ORTA) */
+        .duyuru-box { border-radius: 12px; overflow: hidden; border: 1px solid #eee; margin-bottom: 25px; }
         .duyuru-img { width: 100%; height: auto; display: block; }
-        .fast-test { background: #e3f2fd; padding: 20px; border-radius: 10px; border-left: 5px solid var(--mavi); }
+        .fast-test { background: #ebf8ff; padding: 20px; border-radius: 12px; border: 1px solid #bee3f8; }
 
         /* SAĞ SÜTUN */
-        .sayac-box { background: var(--koyu); color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
-        .timer { font-size: 22px; color: var(--turuncu); font-weight: bold; margin-top: 10px; }
-        .pdf-btn { display: flex; align-items: center; justify-content: space-between; background: #f5f5f5; padding: 12px; border-radius: 8px; text-decoration: none; color: #333; margin-bottom: 8px; border: 1px solid #eee; }
-        .pdf-btn:hover { background: #eee; }
+        .sayac-box { background: var(--koyu); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
+        .timer { font-size: 24px; color: var(--turuncu); font-weight: bold; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; }
+        .pdf-card { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px; border-radius: 8px; text-decoration: none; color: #334155; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 14px; }
+        .pdf-card:hover { border-color: var(--mavi); background: #f1f5f9; }
 
-        @media (max-width: 800px) { .container { flex-direction: column; } }
+        @media (max-width: 1000px) { .container { flex-direction: column; } .column { width: 100%; } }
     </style>
 </head>
 <body>
@@ -56,127 +62,158 @@
     <a href="#">📁 PDF Testler</a>
     <a href="#">📝 Online Yazılılar</a>
     <a href="#">📖 Ders Notları</a>
-    <a href="mailto:iletisim@yazizone.com" style="color: var(--yesil); margin-top: 20px; border: 1px solid var(--yesil); text-align: center; margin-right: 20px; margin-left: 20px; border-radius: 5px;">📩 İletişim</a>
+    <a href="mailto:iletisim@yazizone.com" style="color: var(--yesil); font-weight: bold; text-align: center; border: 1px solid; margin: 20px; border-radius: 8px;">📩 İletişim</a>
 </div>
 
 <header>
     <div class="hamburger" onclick="openNav()">&#9776;</div>
-    <h1>Yazılı Zone</h1>
+    <h1 style="margin: 0;">Yazılı Zone</h1>
 </header>
 
 <div class="container">
     
-    <div class="column">
-        <h3>📚 Ders Notları</h3>
-        <button class="accordion-btn" onclick="toggleAccordion('8sinif')">8. Sınıf ▼</button>
-        <div id="8sinif" class="panel">
-            <button class="sub-btn" onclick="toggleAccordion('8fen')">Fen Bilimleri +</button>
-            <div id="8fen" class="panel">
-                <span class="topic-link" onclick="loadContent('Mevsimlerin Oluşumu Notları...')">Mevsimlerin Oluşumu</span>
-                <span class="topic-link" onclick="loadContent('DNA ve Genetik Kod Notları...')">DNA ve Genetik Kod</span>
+    <div class="column left-col">
+        <h3 style="display: flex; align-items: center; gap: 10px;">📚 Ders Notları</h3>
+        
+        <button class="sinif-btn" onclick="toggleMenu('m8')">8. Sınıf <span>▼</span></button>
+        <div id="m8" class="ders-panel">
+            <button class="ders-btn" onclick="toggleMenu('m8-fen')">Fen Bilimleri <span>+</span></button>
+            <div id="m8-fen" class="konu-listesi">
+                <span class="konu-item" onclick="showNote('Mevsimlerin Oluşumu', '8. Sınıf Fen Bilimleri 1. Ünite detaylı notları buraya gelecek...')">• Mevsimlerin Oluşumu</span>
+                <span class="konu-item" onclick="showNote('DNA ve Genetik Kod', 'Hücre çekirdeği, DNA, Gen ve Nükleotid kavramları...')">• DNA ve Genetik Kod</span>
             </div>
+            <button class="ders-btn">Türkçe <span>+</span></button>
+            <button class="ders-btn">Matematik <span>+</span></button>
         </div>
 
-        <button class="accordion-btn" onclick="toggleAccordion('5sinif')">5. Sınıf ▼</button>
-        <div id="5sinif" class="panel">
-            <button class="sub-btn">Fen Bilimleri +</button>
+        <button class="sinif-btn" onclick="toggleMenu('m7')">7. Sınıf <span>▼</span></button>
+        <div id="m7" class="ders-panel">
+            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
+            <button class="ders-btn">Sosyal Bilgiler <span>+</span></button>
+        </div>
+
+        <button class="sinif-btn" onclick="toggleMenu('m6')">6. Sınıf <span>▼</span></button>
+        <div id="m6" class="ders-panel">
+            <button class="ders-btn">Matematik <span>+</span></button>
+            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
+        </div>
+
+        <button class="sinif-btn" onclick="toggleMenu('m5')">5. Sınıf <span>▼</span></button>
+        <div id="m5" class="ders-panel">
+            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
+            <button class="ders-btn">Türkçe <span>+</span></button>
         </div>
 
         <div class="gunun-sorusu">
-            <h4 style="margin:0">💡 Günün Sorusu</h4>
-            <p id="soru-metni" style="font-size: 14px;">Bitkilere yeşil rengini veren organel hangisidir?</p>
-            <input type="text" id="cevap-input" placeholder="Cevabınızı yazın...">
-            <button class="check-btn" onclick="checkAnswer()">Gönder</button>
-            <p id="cevap-mesaj" style="font-weight: bold; text-align: center; margin-top: 10px;"></p>
+            <h4 style="margin:0; color: var(--turuncu);">💡 Günün Sorusu</h4>
+            <p id="soru-metni" style="font-size: 14px; margin-top: 10px;">Mevsimlerin oluşmasının temel sebebi nedir?</p>
+            <input type="text" id="cevap-input" placeholder="Cevabınızı buraya yazın...">
+            <button class="check-btn" onclick="validateAnswer()">Gönder</button>
+            <p id="feedback" style="font-size: 13px; text-align: center; margin-top: 10px;"></p>
         </div>
     </div>
 
     <div class="column middle-col">
-        <div id="main-display">
-            <h3>📢 Duyurular</h3>
+        <div id="content-area">
+            <h3>📢 Güncel Duyurular</h3>
             <div class="duyuru-box">
-                <img src="https://picsum.photos/seed/yazizone/800/350" class="duyuru-img" alt="Duyuru Görseli">
-                <div style="padding:15px;">
-                    <b>Yazılı Sezonu Başladı!</b>
-                    <p>En güncel yazılı hazırlık PDF'lerini sağ sütundan indirebilirsiniz.</p>
+                <img src="https://picsum.photos/seed/edu/800/350" class="duyuru-img" alt="Eğitim Görseli">
+                <div style="padding:20px; background: #fff;">
+                    <b style="font-size: 18px; color: var(--koyu);">Yazılı Hazırlık Materyalleri Yayında!</b>
+                    <p style="color: #666; line-height: 1.6;">Tüm sınıflar için 1. dönem 1. yazılı örnek soruları ve konu özetleri sisteme yüklenmiştir. Sağ taraftaki PDF bölümünden indirebilirsiniz.</p>
                 </div>
             </div>
 
             <div class="fast-test">
-                <h4>🎯 Hızlı 5 Soru Testi</h4>
-                <p>Sınıfınızı seçin ve hemen başlayın:</p>
-                <select style="padding: 10px; width: 100%; border-radius: 5px;">
-                    <option>8. Sınıf</option>
-                    <option>7. Sınıf</option>
-                    <option>6. Sınıf</option>
-                    <option>5. Sınıf</option>
+                <h4 style="margin-top: 0;">🎯 5 Soruda Kendini Dene</h4>
+                <p style="font-size: 14px;">Sınıfını seç ve hızlı teste başla:</p>
+                <select id="test-select" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #cbd5e0;">
+                    <option>8. Sınıf - Fen Bilimleri</option>
+                    <option>7. Sınıf - Matematik</option>
+                    <option>6. Sınıf - Türkçe</option>
+                    <option>5. Sınıf - Sosyal Bilgiler</option>
                 </select>
                 <button class="check-btn" style="background: var(--mavi);">Testi Başlat</button>
             </div>
         </div>
     </div>
 
-    <div class="column">
+    <div class="column right-col">
         <div class="sayac-box">
-            <div style="font-size: 14px;">⏳ LGS 2026 Geri Sayım</div>
-            <div id="lgs-timer" class="timer">00 : 00 : 00 : 00</div>
-            <p style="font-size: 10px; opacity: 0.7;">Gün : Saat : Dak : San</p>
+            <div style="font-size: 13px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">⏳ LGS 2026 GERİ SAYIM</div>
+            <div id="countdown" class="timer">00:00:00:00</div>
+            <div style="display: flex; justify-content: space-around; font-size: 9px; margin-top: 5px; opacity: 0.6;">
+                <span>GÜN</span><span>SAAT</span><span>DAKİKA</span><span>SANİYE</span>
+            </div>
         </div>
 
-        <h3>📥 Yazılı Örnekleri (PDF)</h3>
-        <a href="ornek1.pdf" download class="pdf-btn">
-            <span>📄 8. Sınıf Fen 1. Dönem</span>
-            <span>⬇️</span>
-        </a>
-        <a href="ornek2.pdf" download class="pdf-btn">
-            <span>📄 8. Sınıf Mat 1. Dönem</span>
-            <span>⬇️</span>
-        </a>
+        <h3 style="border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">📥 Yazılı Örnekleri (PDF)</h3>
+        <div style="margin-top: 15px;">
+            <a href="#" class="pdf-card">
+                <span>📄 8. Sınıf Fen 1. Dönem</span>
+                <b style="color: var(--kirmizi);">İNDİR</b>
+            </a>
+            <a href="#" class="pdf-card">
+                <span>📄 7. Sınıf Mat 1. Dönem</span>
+                <b style="color: var(--kirmizi);">İNDİR</b>
+            </a>
+            <a href="#" class="pdf-card">
+                <span>📄 6. Sınıf Türkçe 1. Dönem</span>
+                <b style="color: var(--kirmizi);">İNDİR</b>
+            </a>
+        </div>
     </div>
 
 </div>
 
 <script>
-    // MENÜ FONKSİYONLARI
+    // Menü Kontrolü
     function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
-    // AKORDİYON (Sınıf/Ders seçimi)
-    function toggleAccordion(id) {
-        var x = document.getElementById(id);
-        x.style.display = (x.style.display === "block") ? "none" : "block";
-    }
-
-    // İÇERİK YÜKLEME (Orta Bölme)
-    function loadContent(text) {
-        document.getElementById('main-display').innerHTML = `<h3>📖 Konu Detayı</h3><div style="padding:20px; background:#fff; border-radius:10px; border:1px solid #eee;">${text}</div><br><button class="check-btn" onclick="location.reload()">Anasayfaya Dön</button>`;
-    }
-
-    // GÜNÜN SORUSU KONTROL
-    function checkAnswer() {
-        var cevap = document.getElementById('cevap-input').value.toLowerCase().trim();
-        var mesaj = document.getElementById('cevap-mesaj');
-        if(cevap === "kloroplast") {
-            mesaj.innerHTML = "🌟 Aferin! Doğru cevap.";
-            mesaj.style.color = "var(--yesil)";
+    // Akordiyon Kontrolü
+    function toggleMenu(id) {
+        var element = document.getElementById(id);
+        if (element.style.display === "block") {
+            element.style.display = "none";
         } else {
-            mesaj.innerHTML = "❌ Tekrar dene!";
-            mesaj.style.color = "var(--kirmizi)";
+            element.style.display = "block";
         }
     }
 
-    // LGS SAYACI
-    const hedef = new Date("June 14, 2026 09:00:00").getTime();
-    setInterval(function() {
-        const simdi = new Date().getTime();
-        const fark = hedef - simdi;
-        
-        const gun = Math.floor(fark / (1000 * 60 * 60 * 24));
-        const saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const dak = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
-        const san = Math.floor((fark % (1000 * 60)) / 1000);
+    // Orta Panelde İçerik Göster
+    function showNote(title, text) {
+        document.getElementById('content-area').innerHTML = `
+            <button onclick="location.reload()" style="margin-bottom:15px; cursor:pointer; background:#eee; border:none; padding:5px 10px; border-radius:4px;">← Geri Dön</button>
+            <h2 style="color:var(--turuncu);">${title}</h2>
+            <div style="line-height:1.8; color:#333; background:#fff; padding:20px; border-radius:12px; border:1px solid #eee;">${text}</div>
+        `;
+    }
 
-        document.getElementById("lgs-timer").innerHTML = `${gun} : ${saat} : ${dak} : ${san}`;
+    // Günün Sorusu Kontrolü
+    function validateAnswer() {
+        const ans = document.getElementById('cevap-input').value.toLowerCase();
+        const feedback = document.getElementById('feedback');
+        if(ans.includes("eksen eğikliği")) {
+            feedback.innerHTML = "🌟 <b>Aferin!</b> Doğru cevap: Eksen Eğikliği.";
+            feedback.style.color = "var(--yesil)";
+        } else {
+            feedback.innerHTML = "❌ Maalesef yanlış, tekrar dene!";
+            feedback.style.color = "var(--kirmizi)";
+        }
+    }
+
+    // LGS Sayacı
+    const targetDate = new Date("June 14, 2026 09:00:00").getTime();
+    setInterval(function() {
+        const now = new Date().getTime();
+        const dist = targetDate - now;
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        document.getElementById("countdown").innerHTML = 
+            (d<10?'0'+d:d) + ":" + (h<10?'0'+h:h) + ":" + (m<10?'0'+m:m) + ":" + (s<10?'0'+s:s);
     }, 1000);
 </script>
 
