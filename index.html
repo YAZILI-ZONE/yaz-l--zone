@@ -3,51 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yazılı-Zone | LGS Hazırlık</title>
+    <title>Yazılı-Zone | LGS Hazırlık Portalı</title>
+    
     <style>
-        body { font-family: sans-serif; text-align: center; background: #f4f4f4; margin: 0; padding: 20px; }
-        header { background: #ff5722; color: white; padding: 20px; border-radius: 10px; }
-        .kutu { background: white; margin: 20px auto; padding: 20px; border-radius: 10px; max-width: 600px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: left; }
-        .buton { background: #ff5722; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin: 5px; text-decoration: none; display: inline-block; }
-        .cevap-btn { background: #333; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
-        .soru-alani { display: none; margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; }
+        /* GENEL TASARIM */
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; margin: 0; padding: 0; transition: 0.3; }
+        header { background: #ff5722; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; }
+
+        /* HAMBURGER MENÜ (ÜÇ ÇİZGİ) */
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: white;
+            user-select: none;
+        }
+
+        /* YAN PANEL (SIDEBAR) */
+        .sidebar {
+            height: 100%;
+            width: 0; 
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            background-color: #2c3e50;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.3);
+        }
+
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #ecf0f1;
+            display: block;
+            transition: 0.3s;
+            border-bottom: 1px solid #34495e;
+        }
+
+        .sidebar a:hover { background-color: #ff5722; color: white; }
+
+        /* İLETİŞİM BÖLÜMÜ STİLİ */
+        .sidebar .iletisim-bilgi {
+            padding: 20px 25px;
+            color: #bdc3c7;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .sidebar .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ÜÇ SÜTUNLU YAPI */
+        .ana-konteyner {
+            display: flex;
+            gap: 20px;
+            padding: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sol-sutun { flex: 1; min-width: 200px; }
+        .orta-sutun { flex: 3; min-width: 400px; }
+        .sag-sutun { flex: 1.5; min-width: 280px; }
+
+        .kutu { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .kutu h3 { margin-top: 0; color: #ff5722; border-bottom: 2px solid #fff3f0; padding-bottom: 10px; }
+
+        .buton { background: #ff5722; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; margin-bottom: 10px; display: block; text-align: center; text-decoration: none; }
+        .cevap-btn { background: #34495e; color: white; padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; margin: 5px; }
+
+        /* MOBİL UYUM */
+        @media (max-width: 1000px) {
+            .ana-konteyner { flex-direction: column; }
+            .sol-sutun, .orta-sutun, .sag-sutun { width: 100%; flex: none; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Yazılı-Zone Hazırlık Merkezi</h1>
-    <p>Sınava Hazırlanmanın En Eğlenceli Yolu</p>
-</header>
-
-<div class="kutu" style="text-align:center;">
-    <h2>🎯 Günün Sorusu</h2>
-    <p>Sınıfını Seç:</p>
-    <button class="buton" onclick="goster('s8')">8. Sınıf</button>
-    <button class="buton" onclick="alert('Yakında eklenecek!')">Diğer Sınıflar</button>
-
-    <div id="s8" class="soru-alani">
-        <h3 style="color:#ff5722;">8. Sınıf 2. Dönem Matematik</h3>
-        
-        <p><b>Soru 1:</b> 2x + 5 = 15 ise x kaçtır?</p>
-        <button class="cevap-btn" onclick="this.style.background='green'; alert('Doğru!')">5</button>
-        <button class="cevap-btn" onclick="this.style.background='red'; alert('Yanlış!')">10</button>
-
-        <p><b>Soru 2:</b> Hangisi bir doğrusal denklem grafiğidir?</p>
-        <button class="cevap-btn" onclick="alert('Doğru!')">y = 2x + 1</button>
-        <button class="cevap-btn" onclick="alert('Yanlış!')">y = x²</button>
+<div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="closeNav()">&times;</span>
+    <a href="#ders-notlari" onclick="closeNav()">📚 Ders Notları</a>
+    <a href="#pdf-indir" onclick="closeNav()">📄 PDF Yazılılar</a>
+    <a href="#online-test" onclick="closeNav()">💻 Online Yazılılar</a>
+    
+    <a href="mailto:yalizone@gmail.com" style="background:#1abc9c; margin-top: 20px;">📧 İletişime Geç</a>
+    <div class="iletisim-bilgi">
+        <b>E-posta:</b><br>
+        yazizone@gmail.com<br><br>
+        <i>Sorularınız veya iş birliği için bize yazın!</i>
     </div>
 </div>
 
-<div class="kutu" style="text-align:center;">
-    <h2>📚 Kaynaklar</h2>
-    <a href="8.sınıfmatematikyazılısı.pdf" class="buton" download>PDF İndir</a>
+<header>
+    <span class="menu-icon" onclick="openNav()">&#9776;</span>
+    <h1>Yazılı-Zone</h1>
+    <div id="lgs-sayac" style="font-weight:bold;">LGS Sayacı Yükleniyor...</div>
+</header>
+
+<div class="ana-konteyner">
+    
+    <div class="sol-sutun" id="ders-notlari">
+        <div class="kutu">
+            <h3>📂 Sınıf Notları</h3>
+            <a href="#" class="buton" style="background:#9b59b6;">5. Sınıf</a>
+            <a href="#" class="buton" style="background:#3498db;">6. Sınıf</a>
+            <a href="#" class="buton" style="background:#e67e22;">7. Sınıf</a>
+            <a href="#" class="buton" style="background:#e74c3c;">8. Sınıf</a>
+        </div>
+    </div>
+
+    <div class="orta-sutun">
+        <div class="kutu">
+            <h3>📌 Haftanın Konusu</h3>
+            <p>Sevgili öğrenciler, 8. sınıflar için hazırladığımız özel notları incelemeyi unutmayın! Yan menüden tüm içeriklere ulaşabilirsiniz.</p>
+            <div style="background: #eee; height: 200px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #777; font-weight: bold;">
+                KONU ANLATIM GÖRSELİ
+            </div>
+        </div>
+    </div>
+
+    <div class="sag-sutun">
+        <div id="online-test" class="kutu">
+            <h3>📝 Online Yazılı</h3>
+            <p>Hızlı bir soru: <b>x + 2 = 5 ise x kaçtır?</b></p>
+            <button class="cevap-btn" onclick="alert('Doğru! Tebrikler.')">3</button>
+            <button class="cevap-btn" onclick="alert('Maalesef yanlış.')">5</button>
+        </div>
+
+        <div id="pdf-indir" class="kutu">
+            <h3>📥 PDF Yazılılar</h3>
+            <a href="8.sınıfmatematikyazılısı.pdf" class="buton" style="background:#2ecc71;" download>📄 PDF İNDİR</a>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    function goster(id) {
-        document.getElementById(id).style.display = 'block';
+    function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
     }
+
+    function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+    }
+
+    // LGS SAYACI
+    var lgsTarihi = new Date("June 7, 2026 09:30:00").getTime();
+    setInterval(function() {
+        var simdi = new Date().getTime();
+        var fark = lgsTarihi - simdi;
+        var gun = Math.floor(fark / (1000 * 60 * 60 * 24));
+        var saat = Math.floor((fark % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var dakika = Math.floor((fark % (1000 * 60 * 60)) / (1000 * 60));
+        var saniye = Math.floor((fark % (1000 * 60)) / 1000);
+        document.getElementById("lgs-sayac").innerHTML = "LGS'ye: " + gun + " Gün " + saat + " Saat " + dakika + " Dakika " + saniye + " Saniye";
+    }, 1000);
 </script>
 
 </body>
