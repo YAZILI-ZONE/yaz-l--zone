@@ -3,52 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yazılı-Zone | İnteraktif Eğitim Portalı</title>
+    <title>Yazılı-Zone | Eğitim Portalı & WhatsApp Topluluğu</title>
     <style>
-        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --kirmizi: #e74c3c; --beyaz: #ffffff; }
+        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --kirmizi: #e74c3c; --beyaz: #ffffff; --wa-yesil: #25D366; }
         
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; color: #333; }
         
-        /* HEADER */
         header { background: var(--turuncu); color: white; padding: 25px; text-align: center; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .menu-icon { font-size: 30px; cursor: pointer; position: absolute; left: 25px; top: 20px; }
 
-        /* HAMBURGER MENÜ (SOL) */
+        /* SİDEBAR */
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: var(--koyu); overflow-x: hidden; transition: 0.5s; padding-top: 60px; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: white; display: block; margin: 8px 15px; border-radius: 8px; background: rgba(255,255,255,0.05); transition: 0.3s; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 17px; color: white; display: block; margin: 8px 15px; border-radius: 8px; background: rgba(255,255,255,0.05); transition: 0.3s; }
         .sidebar a:hover { background: var(--yesil); padding-left: 35px; }
-        .menu-baslik { color: var(--turuncu); font-size: 13px; padding-left: 25px; margin-top: 20px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .wa-link-sidebar { color: var(--wa-yesil) !important; font-weight: bold; border: 1px solid var(--wa-yesil) !important; }
 
-        /* ANA KONTEYNER */
+        /* ANA YAPI */
         .ana-konteyner { display: flex; gap: 20px; padding: 25px; max-width: 1500px; margin: 0 auto; align-items: flex-start; }
-        .sutun { background: var(--beyaz); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .sutun { background: var(--beyaz); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         
         .sol { flex: 1; min-width: 300px; border-top: 5px solid var(--yesil); }
-        .orta { flex: 2; min-width: 450px; border-top: 5px solid var(--turuncu); min-height: 700px; }
+        .orta { flex: 2.5; min-width: 450px; border-top: 5px solid var(--turuncu); min-height: 800px; }
         .sag { flex: 1; min-width: 280px; border-top: 5px solid var(--mavi); }
 
-        /* AKORDİYON SİSTEMİ (SINIF-DERS-KONU) */
+        /* AKORDİYON MENÜ */
         .sinif-btn { background: var(--yesil); color: white; width: 100%; padding: 15px; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; font-weight: bold; text-align: left; display: flex; justify-content: space-between; }
         .ders-btn { background: #e8f5e9; color: var(--koyu); width: 100%; padding: 10px; border: 1px solid #c8e6c9; border-radius: 5px; margin-top: 5px; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; }
         .konu-listesi { display: none; padding-left: 15px; margin-bottom: 10px; border-left: 2px solid var(--turuncu); margin-left: 10px; }
         .konu-link { display: block; padding: 8px; color: #555; text-decoration: none; font-size: 13px; cursor: pointer; }
-        .konu-link:hover { color: var(--turuncu); background: #fff3e0; border-radius: 4px; }
-        .dersler-konteynir { display: none; padding: 10px; background: #fafafa; border-radius: 0 0 8px 8px; }
+        .dersler-konteynir { display: none; padding: 10px; background: #fafafa; }
 
-        /* SAĞ SÜTUN PDF LİSTESİ */
-        .pdf-liste { list-style: none; padding: 0; margin-top: 15px; }
-        .pdf-item { display: flex; align-items: center; padding: 12px; background: #f8f9fa; margin-bottom: 10px; border-radius: 8px; border: 1px solid #eee; text-decoration: none; color: #333; font-size: 13px; transition: 0.2s; }
-        .pdf-item:hover { border-color: var(--mavi); background: #fff; transform: translateX(5px); }
-        .pdf-icon { color: var(--kirmizi); font-weight: bold; margin-right: 10px; font-size: 11px; border: 1px solid var(--kirmizi); padding: 2px 4px; border-radius: 4px; }
+        /* WHATSAPP BUTONU SÜSLÜ */
+        .wa-kanal-kart { background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 20px; border-radius: 15px; text-align: center; text-decoration: none; display: block; margin-bottom: 25px; transition: transform 0.3s, box-shadow 0.3s; animation: pulse 2s infinite; }
+        .wa-kanal-kart:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
+        .wa-baslik { font-size: 18px; font-weight: bold; display: block; margin-bottom: 5px; }
+        .wa-alt { font-size: 12px; opacity: 0.9; }
 
-        /* KONU ANLATIMI VE GÖRSELLER */
-        .not-icerik { line-height: 1.8; font-size: 15px; animation: fadeIn 0.4s; }
-        .konu-resim { max-width: 100%; height: auto; border-radius: 10px; margin: 15px 0; border: 1px solid #eee; display: block; }
-        .uyari-kutusu { background: #e3f2fd; padding: 15px; border-radius: 10px; border-left: 5px solid var(--mavi); margin: 15px 0; }
-        
-        .btn-aksiyon { background: #ef5350; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; font-size: 16px; margin-top: 20px; cursor: pointer; font-weight: bold; }
-        .buyuk-sayi { font-size: 50px; font-weight: bold; color: var(--turuncu); text-align: center; }
+        /* NOT TASARIMI */
+        .not-icerik { line-height: 1.8; animation: fadeIn 0.4s; padding: 10px; }
+        .ornek-kutusu { background: #f1f8e9; border-left: 5px solid var(--yesil); padding: 15px; margin: 15px 0; }
+        .dikkat-kutusu { background: #fff3e0; border-left: 5px solid var(--turuncu); padding: 15px; margin: 15px 0; font-weight: bold; }
+        .konu-resim { max-width: 100%; border-radius: 12px; margin: 20px 0; }
 
+        /* SAYAÇ */
+        .sayac-kutu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; text-align: center; margin-top: 15px; }
+        .zaman-birim { background: var(--koyu); color: white; padding: 10px 5px; border-radius: 8px; }
+        .zaman-sayi { display: block; font-size: 20px; font-weight: bold; color: var(--turuncu); }
+        .zaman-etiket { font-size: 10px; text-transform: uppercase; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @media (max-width: 1100px) { .ana-konteyner { flex-direction: column; } .sutun { width: 100%; } }
     </style>
@@ -58,140 +61,73 @@
 <div id="mySidebar" class="sidebar">
     <span onclick="closeNav()" style="position:absolute; top:10px; right:25px; font-size:36px; color:white; cursor:pointer;">&times;</span>
     <a href="#" onclick="location.reload()">🏠 Ana Sayfa</a>
-    
-    <div class="menu-baslik">Sınav Merkezi</div>
+    <a href="https://whatsapp.com/channel/YaziliZoneLinkiniz" target="_blank" class="wa-link-sidebar">📱 Yazılı Zone Kanalı</a>
     <a href="#">💻 Online Testler</a>
     <a href="#">📥 PDF Test Arşivi</a>
-    
-    <div class="menu-baslik">Destek</div>
-    <a href="mailto:yazizone@gmail.com">📧 İletişim</a>
 </div>
 
 <header>
     <span class="menu-icon" onclick="openNav()">&#9776;</span>
     <h1>Yazılı-Zone Portal</h1>
-    <p>Sınıf, Ders ve Konu Odaklı Eğitim Platformu</p>
+    <p>WhatsApp Kanalımız Açıldı! Güncel Notlar Cebinde.</p>
 </header>
 
 <div class="ana-konteyner">
     
     <div class="sutun sol">
         <h3 style="text-align:center;">📚 Ders Notları</h3>
-        
         <button class="sinif-btn" onclick="toggleMenu('d8-dersler')">8. Sınıf <span>▼</span></button>
         <div id="d8-dersler" class="dersler-konteynir">
             <button class="ders-btn" onclick="toggleMenu('d8-turkce-konu')">Türkçe <span>+</span></button>
             <div id="d8-turkce-konu" class="konu-listesi">
-                <a class="konu-link" onclick="notGoster('fiilimsiler')">• Fiilimsiler</a>
+                <a class="konu-link" onclick="notGoster('fiilimsiler')">• Fiilimsiler (Kapsamlı)</a>
             </div>
             <button class="ders-btn" onclick="toggleMenu('d8-fen-konu')">Fen Bilimleri <span>+</span></button>
             <div id="d8-fen-konu" class="konu-listesi">
-                <a class="konu-link" onclick="notGoster('mevsimler')">• Mevsimlerin Oluşumu</a>
+                <a class="konu-link" onclick="notGoster('mevsimler')">• Mevsimlerin Oluşumu (Kapsamlı)</a>
             </div>
         </div>
-
+        <button class="sinif-btn">7. Sınıf (Yakında)</button>
+        <button class="sinif-btn">6. Sınıf (Yakında)</button>
         <button class="sinif-btn" onclick="toggleMenu('d5-dersler')">5. Sınıf <span>▼</span></button>
         <div id="d5-dersler" class="dersler-konteynir">
-            <button class="ders-btn" onclick="toggleMenu('d5-fen-konu')">Fen Bilimleri <span>+</span></button>
-            <div id="d5-fen-konu" class="konu-listesi">
+             <button class="ders-btn" onclick="toggleMenu('d5-fen-konu')">Fen Bilimleri <span>+</span></button>
+             <div id="d5-fen-konu" class="konu-listesi">
                 <a class="konu-link" onclick="notGoster('gunes dunya ay')">• Güneş, Dünya ve Ay</a>
-            </div>
+             </div>
         </div>
     </div>
 
     <div class="sutun orta">
         <div id="ana-panel">
-            <h3>📢 Hoş Geldiniz</h3>
-            <div style="background:#fffbf0; border:1px dashed var(--turuncu); padding:20px; border-radius:12px;">
-                <p>Eğitim portalımızda sol taraftan sınıfınızı ve dersinizi seçerek görsel destekli konu anlatımlarına ulaşabilir, sağ taraftan yazılı kağıtlarını indirebilirsiniz.</p>
+            <h3>📢 Güncel Duyurular</h3>
+            <div style="background:#fffbf0; border:1px solid #ffeaa7; border-radius:12px; overflow:hidden; margin-bottom:20px;">
+                <img src="https://picsum.photos/seed/wa/800/250" style="width:100%;">
+                <div style="padding:15px;">
+                    <b>📱 Yazılı Zone WhatsApp Kanalı Aktif!</b>
+                    <p>Yeni eklenen PDF'ler, ders notları ve sınav ipuçlarından anında haberdar olmak için kanalımızı takip etmeyi unutmayın.</p>
+                    <a href="https://whatsapp.com/channel/YaziliZoneLinkiniz" target="_blank" style="color:var(--wa-yesil); font-weight:bold;">Hemen Katılmek İçin Tıkla →</a>
+                </div>
             </div>
-            <button class="btn-aksiyon" onclick="alert('Test Sistemi Yükleniyor...')">🚀 Hızlı Deneme Testini Başlat</button>
         </div>
 
         <div id="ders-notu-alani" style="display:none;">
-            <button onclick="location.reload()" style="cursor:pointer; padding:8px 15px; margin-bottom:20px; border-radius:5px; border:1px solid #ccc;">← Ana Sayfaya Dön</button>
+            <button onclick="location.reload()" style="cursor:pointer; padding:8px 15px; margin-bottom:20px; border-radius:5px;">← Geri Dön</button>
             <div id="not-icerik-div" class="not-icerik"></div>
         </div>
     </div>
 
     <div class="sutun sag">
-        <h3 style="text-align:center; color:var(--mavi);">📄 Yazılı Kağıtları</h3>
-        <div class="pdf-liste">
-            <a href="#" class="pdf-item"><span class="pdf-icon">PDF</span> 8. Sınıf Fen 1.Dönem 1.Yazılı</a>
-            <a href="#" class="pdf-item"><span class="pdf-icon">PDF</span> 8. Sınıf Türkçe 1.Dönem 1.Yazılı</a>
-            <a href="#" class="pdf-item"><span class="pdf-icon">PDF</span> 5. Sınıf Fen 1.Dönem 1.Yazılı</a>
+        <a href="https://whatsapp.com/channel/YaziliZoneLinkiniz" target="_blank" class="wa-kanal-kart">
+            <span class="wa-baslik">📱 Yazılı Zone</span>
+            <span class="wa-alt">WhatsApp Kanalına Katıl</span>
+        </a>
+
+        <h3 style="text-align:center; color:var(--mavi); font-size:16px;">📄 Son Yazılı PDF'leri</h3>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="padding:10px; background:#f9f9f9; border-radius:8px; font-size:13px; border:1px solid #eee;">8. Sınıf Fen 1.Dönem</div>
+            <div style="padding:10px; background:#f9f9f9; border-radius:8px; font-size:13px; border:1px solid #eee;">5. Sınıf Fen 1.Dönem</div>
         </div>
 
-        <div style="margin-top:40px; padding:15px; background:#f9f9f9; border-radius:12px; border:1px solid #eee;">
-            <h3 style="text-align:center;">⏳ LGS Sayacı</h3>
-            <div id="gun-sayi" class="buyuk-sayi">0</div>
-            <p style="text-align:center; font-size:12px; font-weight:bold; color:#777;">GÜN KALDI</p>
-        </div>
-    </div>
-</div>
-
-<script>
-    // MENÜ KONTROLLERİ
-    function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
-    function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
-
-    function toggleMenu(id) {
-        const x = document.getElementById(id);
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
-        }
-    }
-
-    // KONU ANLATIMLARI (DETAYLI VE GÖRSELLİ)
-    function notGoster(konu) {
-        document.getElementById('ana-panel').style.display = 'none';
-        document.getElementById('ders-notu-alani').style.display = 'block';
-        const div = document.getElementById('not-icerik-div');
-        
-        if(konu === 'fiilimsiler') {
-            div.innerHTML = `
-                <h2 style="color:var(--turuncu);">📖 Fiilimsiler (Eylemsiler)</h2>
-                <img src="https://picsum.photos/seed/grammar/600/300" class="konu-resim">
-                <p>Fiilimsiler; fiil kök veya gövdelerine getirilen özel eklerle türetilen, cümlede isim, sıfat veya zarf görevinde kullanılan sözcüklerdir.</p>
-                <h3>1. İsim-Fiiller (-ma, -ış, -mak)</h3>
-                <p>Örnek: Kitap <b>okumayı</b> seviyorum. Onun <b>bakış</b>ı çok sertti.</p>
-                <h3>2. Sıfat-Fiiller (-an, -ası, -mez, -ar, -dik, -ecek, -miş)</h3>
-                <p>Örnek: <b>Tanıdık</b> bir yüz aradım. <b>Görünen</b> köy kılavuz istemez.</p>
-                <div class="uyari-kutusu"><b>Not:</b> Sıfat-fiiller bazen niteledikleri isim düşerek adlaşmış sıfat olabilirler.</div>
-            `;
-        } else if(konu === 'mevsimler') {
-            div.innerHTML = `
-                <h2 style="color:#2980b9;">🌍 Mevsimlerin Oluşumu</h2>
-                <img src="https://picsum.photos/seed/earth/600/300" class="konu-resim">
-                <p>Mevsimlerin oluşmasının iki temel sebebi vardır: Dünya'nın eksen eğikliği ve Güneş etrafındaki dolanma hareketi.</p>
-                <div class="uyari-kutusu">Güneş ışınları dik geldiği bölgeleri daha fazla ısıtır (Yaz), eğik geldiği bölgeleri daha az ısıtır (Kış).</div>
-                <h3>Önemli Tarihler</h3>
-                <ul>
-                    <li><b>21 Haziran:</b> Kuzey Yarım Küre'de Yaz başlar.</li>
-                    <li><b>21 Aralık:</b> Kuzey Yarım Küre'de Kış başlar.</li>
-                    <li><b>21 Mart / 23 Eylül:</b> Ekinoks (Gece-gündüz eşitliği).</li>
-                </ul>
-            `;
-        } else if(konu === 'gunes dunya ay') {
-            div.innerHTML = `
-                <h2 style="color:#e67e22;">🌞 Güneş, Dünya ve Ay</h2>
-                <img src="https://picsum.photos/seed/space/600/300" class="konu-resim">
-                <p>Güneş bir yıldızdır, Dünya bir gezegendir, Ay ise Dünya'nın uydusudur.</p>
-                <h3>Ay'ın Evreleri</h3>
-                <p>Ay, Dünya etrafında dolandığı için Güneş'ten aldığı ışığı farklı şekillerde görürüz. Ana evreler: Yeni Ay, İlk Dördün, Dolunay, Son Dördün.</p>
-            `;
-        }
-    }
-
-    // SAYAÇ AYARI
-    const hedef = new Date("June 14, 2026 09:00:00").getTime();
-    setInterval(() => {
-        const fark = hedef - new Date().getTime();
-        document.getElementById("gun-sayi").innerText = Math.floor(fark / (1000 * 60 * 60 * 24));
-    }, 1000);
-</script>
-
-</body>
-</html>
+        <div style="margin-top:30px; padding:15px; background:#2c3e50; border-radius:12px; color:white;">
+            <h3 style="text-align:center; font-size:14px; margin-top:0;">⏳ LGS 20
