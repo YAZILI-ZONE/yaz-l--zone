@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yazılı Zone | Eğitim Portalı</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+
     <style>
-        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --beyaz: #ffffff; --kirmizi: #e74c3c; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; }
+        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --beyaz: #ffffff; --kirmizi: #e74c3c; --wa-yesil: #25D366; }
+        
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; color: #333; }
         
         /* HEADER & HAMBURGER */
         header { background: var(--turuncu); color: white; padding: 15px; text-align: center; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .hamburger { font-size: 30px; cursor: pointer; position: absolute; left: 20px; }
+        .hamburger { font-size: 30px; cursor: pointer; position: absolute; left: 20px; transition: 0.3s; }
+        .hamburger:hover { color: var(--koyu); }
 
         /* YAN MENÜ (SIDEBAR) */
         .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: var(--koyu); overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
+        .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; padding-left: 35px; }
         .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; cursor: pointer; }
+        .wa-menu-link { color: var(--wa-yesil) !important; font-weight: bold; }
 
         /* ANA KONTEYNER */
         .container { display: flex; gap: 20px; padding: 20px; max-width: 1450px; margin: 0 auto; flex-wrap: wrap; align-items: flex-start; }
@@ -26,12 +32,9 @@
         .right-col { border-top: 5px solid var(--mavi); }
 
         /* SOL SÜTUN: AKORDİYON SİSTEMİ */
-        .sinif-btn { background: var(--yesil); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; text-align: left; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; transition: 0.3s; }
-        .sinif-btn:hover { background: #27ae60; }
-        
+        .sinif-btn { background: var(--yesil); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; text-align: left; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
         .ders-panel { display: none; padding: 5px 10px; background: #f0fdf4; border-radius: 0 0 8px 8px; margin-bottom: 10px; border: 1px solid #dcfce7; }
         .ders-btn { background: #ffffff; border: 1px solid #e2e8f0; width: 100%; padding: 10px; margin: 5px 0; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; border-radius: 5px; display: flex; justify-content: space-between; }
-        
         .konu-listesi { display: none; padding-left: 20px; padding-bottom: 10px; }
         .konu-item { display: block; padding: 6px 0; font-size: 13px; color: #4a5568; text-decoration: none; cursor: pointer; border-bottom: 1px dashed #edf2f7; }
         .konu-item:hover { color: var(--turuncu); font-weight: bold; }
@@ -39,18 +42,19 @@
         /* GÜNÜN SORUSU */
         .gunun-sorusu { margin-top: 30px; padding: 15px; border: 2px solid var(--turuncu); border-radius: 12px; background: #fffcf0; }
         .gunun-sorusu input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box; }
-        .check-btn { background: var(--turuncu); color: white; border: none; padding: 10px; margin-top: 10px; cursor: pointer; width: 100%; border-radius: 5px; font-weight: bold; }
+        .check-btn { background: var(--turuncu); color: white; border: none; padding: 12px; margin-top: 10px; cursor: pointer; width: 100%; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .check-btn:hover { opacity: 0.8; }
 
-        /* DUYURULAR & TESTLER (ORTA) */
-        .duyuru-box { border-radius: 12px; overflow: hidden; border: 1px solid #eee; margin-bottom: 25px; }
+        /* DUYURULAR (ORTA) */
+        .duyuru-box { border-radius: 12px; overflow: hidden; border: 1px solid #eee; margin-bottom: 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.03); }
         .duyuru-img { width: 100%; height: auto; display: block; }
         .fast-test { background: #ebf8ff; padding: 20px; border-radius: 12px; border: 1px solid #bee3f8; }
 
-        /* SAĞ SÜTUN */
+        /* SAĞ SÜTUN: SAYAÇ & PDF */
         .sayac-box { background: var(--koyu); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
-        .timer { font-size: 24px; color: var(--turuncu); font-weight: bold; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; }
-        .pdf-card { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px; border-radius: 8px; text-decoration: none; color: #334155; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 14px; }
-        .pdf-card:hover { border-color: var(--mavi); background: #f1f5f9; }
+        .timer { font-size: 24px; color: var(--turuncu); font-weight: bold; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 10px 0; }
+        .pdf-card { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px; border-radius: 8px; text-decoration: none; color: #334155; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 14px; transition: 0.2s; }
+        .pdf-card:hover { border-color: var(--mavi); background: #f1f5f9; transform: translateX(5px); }
 
         @media (max-width: 1000px) { .container { flex-direction: column; } .column { width: 100%; } }
     </style>
@@ -59,9 +63,12 @@
 
 <div id="mySidebar" class="sidebar">
     <span class="close-btn" onclick="closeNav()">&times;</span>
+    <div style="color: var(--turuncu); padding: 10px 25px; font-size: 14px; font-weight: bold;">İÇERİKLER</div>
     <a href="#">📁 PDF Testler</a>
     <a href="#">📝 Online Yazılılar</a>
     <a href="#">📖 Ders Notları</a>
+    <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" class="wa-menu-link">📱 Yazılı Zone WhatsApp</a>
+    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;"></div>
     <a href="mailto:iletisim@yazizone.com" style="color: var(--yesil); font-weight: bold; text-align: center; border: 1px solid; margin: 20px; border-radius: 8px;">📩 İletişim</a>
 </div>
 
@@ -73,43 +80,33 @@
 <div class="container">
     
     <div class="column left-col">
-        <h3 style="display: flex; align-items: center; gap: 10px;">📚 Ders Notları</h3>
+        <h3>📚 Ders Notları</h3>
         
         <button class="sinif-btn" onclick="toggleMenu('m8')">8. Sınıf <span>▼</span></button>
         <div id="m8" class="ders-panel">
             <button class="ders-btn" onclick="toggleMenu('m8-fen')">Fen Bilimleri <span>+</span></button>
             <div id="m8-fen" class="konu-listesi">
-                <span class="konu-item" onclick="showNote('Mevsimlerin Oluşumu', '8. Sınıf Fen Bilimleri 1. Ünite detaylı notları buraya gelecek...')">• Mevsimlerin Oluşumu</span>
-                <span class="konu-item" onclick="showNote('DNA ve Genetik Kod', 'Hücre çekirdeği, DNA, Gen ve Nükleotid kavramları...')">• DNA ve Genetik Kod</span>
+                <span class="konu-item" onclick="showNote('Mevsimlerin Oluşumu', 'Dünyanın eksen eğikliği ve güneş etrafındaki dolanımı mevsimleri oluşturur...')">• Mevsimlerin Oluşumu</span>
+                <span class="konu-item" onclick="showNote('DNA ve Genetik Kod', 'Hücre çekirdeği, DNA, Gen ve Nükleotid hiyerarşisi...')">• DNA ve Genetik Kod</span>
             </div>
-            <button class="ders-btn">Türkçe <span>+</span></button>
             <button class="ders-btn">Matematik <span>+</span></button>
         </div>
 
         <button class="sinif-btn" onclick="toggleMenu('m7')">7. Sınıf <span>▼</span></button>
-        <div id="m7" class="ders-panel">
-            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
-            <button class="ders-btn">Sosyal Bilgiler <span>+</span></button>
-        </div>
+        <div id="m7" class="ders-panel"><button class="ders-btn">Fen Bilimleri <span>+</span></button></div>
 
         <button class="sinif-btn" onclick="toggleMenu('m6')">6. Sınıf <span>▼</span></button>
-        <div id="m6" class="ders-panel">
-            <button class="ders-btn">Matematik <span>+</span></button>
-            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
-        </div>
+        <div id="m6" class="ders-panel"><button class="ders-btn">Matematik <span>+</span></button></div>
 
         <button class="sinif-btn" onclick="toggleMenu('m5')">5. Sınıf <span>▼</span></button>
-        <div id="m5" class="ders-panel">
-            <button class="ders-btn">Fen Bilimleri <span>+</span></button>
-            <button class="ders-btn">Türkçe <span>+</span></button>
-        </div>
+        <div id="m5" class="ders-panel"><button class="ders-btn">Fen Bilimleri <span>+</span></button></div>
 
         <div class="gunun-sorusu">
             <h4 style="margin:0; color: var(--turuncu);">💡 Günün Sorusu</h4>
-            <p id="soru-metni" style="font-size: 14px; margin-top: 10px;">Mevsimlerin oluşmasının temel sebebi nedir?</p>
+            <p id="soru-metni" style="font-size: 14px; margin-top: 10px;">Bitki hücresinde fotosentezin yapıldığı organel hangisidir?</p>
             <input type="text" id="cevap-input" placeholder="Cevabınızı buraya yazın...">
             <button class="check-btn" onclick="validateAnswer()">Gönder</button>
-            <p id="feedback" style="font-size: 13px; text-align: center; margin-top: 10px;"></p>
+            <p id="feedback" style="font-size: 13px; text-align: center; margin-top: 10px; font-weight: bold;"></p>
         </div>
     </div>
 
@@ -118,16 +115,17 @@
             <h3>📢 Güncel Duyurular</h3>
             <div class="duyuru-box">
                 <img src="https://picsum.photos/seed/edu/800/350" class="duyuru-img" alt="Eğitim Görseli">
-                <div style="padding:20px; background: #fff;">
-                    <b style="font-size: 18px; color: var(--koyu);">Yazılı Hazırlık Materyalleri Yayında!</b>
-                    <p style="color: #666; line-height: 1.6;">Tüm sınıflar için 1. dönem 1. yazılı örnek soruları ve konu özetleri sisteme yüklenmiştir. Sağ taraftaki PDF bölümünden indirebilirsiniz.</p>
+                <div style="padding:20px;">
+                    <b style="font-size: 18px;">📱 Yazılı Zone WhatsApp Kanalı Aktif!</b>
+                    <p style="color: #666;">Yeni eklenen ders notları ve yazılı PDF'lerinden anında haberdar olmak için kanalımızı takip etmeyi unutmayın.</p>
+                    <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" style="color: var(--wa-yesil); font-weight: bold; text-decoration: none;">Hemen Katılmak İçin Tıkla →</a>
                 </div>
             </div>
 
             <div class="fast-test">
-                <h4 style="margin-top: 0;">🎯 5 Soruda Kendini Dene</h4>
-                <p style="font-size: 14px;">Sınıfını seç ve hızlı teste başla:</p>
-                <select id="test-select" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #cbd5e0;">
+                <h4 style="margin-top: 0;">🎯 5 Soruluk Hızlı Test</h4>
+                <p style="font-size: 14px;">Sınıfını seç ve bilgilerini tazele:</p>
+                <select id="test-select" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #cbd5e0; margin-bottom: 10px;">
                     <option>8. Sınıf - Fen Bilimleri</option>
                     <option>7. Sınıf - Matematik</option>
                     <option>6. Sınıf - Türkçe</option>
@@ -140,25 +138,25 @@
 
     <div class="column right-col">
         <div class="sayac-box">
-            <div style="font-size: 13px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">⏳ LGS 2026 GERİ SAYIM</div>
+            <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; opacity: 0.8;">⏳ LGS 2026 GERİ SAYIM</div>
             <div id="countdown" class="timer">00:00:00:00</div>
-            <div style="display: flex; justify-content: space-around; font-size: 9px; margin-top: 5px; opacity: 0.6;">
+            <div style="display: flex; justify-content: space-around; font-size: 9px; opacity: 0.6;">
                 <span>GÜN</span><span>SAAT</span><span>DAKİKA</span><span>SANİYE</span>
             </div>
         </div>
 
-        <h3 style="border-bottom: 2px solid #f1f5f9; padding-bottom: 10px;">📥 Yazılı Örnekleri (PDF)</h3>
+        <h3>📥 Yazılı Örnekleri (PDF)</h3>
         <div style="margin-top: 15px;">
+            <a href="yazili.pdf" download class="pdf-card">
+                <span>📄 8. Sınıf Matematik 1. Dönem</span>
+                <b style="color: var(--kirmizi);">İNDİR</b>
+            </a>
             <a href="#" class="pdf-card">
                 <span>📄 8. Sınıf Fen 1. Dönem</span>
                 <b style="color: var(--kirmizi);">İNDİR</b>
             </a>
             <a href="#" class="pdf-card">
-                <span>📄 7. Sınıf Mat 1. Dönem</span>
-                <b style="color: var(--kirmizi);">İNDİR</b>
-            </a>
-            <a href="#" class="pdf-card">
-                <span>📄 6. Sınıf Türkçe 1. Dönem</span>
+                <span>📄 5. Sınıf Fen 1. Dönem</span>
                 <b style="color: var(--kirmizi);">İNDİR</b>
             </a>
         </div>
@@ -167,35 +165,31 @@
 </div>
 
 <script>
-    // Menü Kontrolü
+    // Sidebar Menü Kontrolü
     function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
-    // Akordiyon Kontrolü
+    // Akordiyon (Açılır-Kapanır) Menü
     function toggleMenu(id) {
-        var element = document.getElementById(id);
-        if (element.style.display === "block") {
-            element.style.display = "none";
-        } else {
-            element.style.display = "block";
-        }
+        var el = document.getElementById(id);
+        el.style.display = (el.style.display === "block") ? "none" : "block";
     }
 
-    // Orta Panelde İçerik Göster
+    // Orta Panele Not Yükleme
     function showNote(title, text) {
         document.getElementById('content-area').innerHTML = `
-            <button onclick="location.reload()" style="margin-bottom:15px; cursor:pointer; background:#eee; border:none; padding:5px 10px; border-radius:4px;">← Geri Dön</button>
+            <button onclick="location.reload()" style="margin-bottom:15px; cursor:pointer; background:#eee; border:none; padding:8px 12px; border-radius:5px;">← Ana Sayfaya Dön</button>
             <h2 style="color:var(--turuncu);">${title}</h2>
-            <div style="line-height:1.8; color:#333; background:#fff; padding:20px; border-radius:12px; border:1px solid #eee;">${text}</div>
+            <div style="line-height:1.8; color:#333; background:#fff; padding:25px; border-radius:12px; border:1px solid #eee; font-size:16px;">${text}</div>
         `;
     }
 
-    // Günün Sorusu Kontrolü
+    // Günün Sorusu Cevap Kontrolü
     function validateAnswer() {
-        const ans = document.getElementById('cevap-input').value.toLowerCase();
+        const ans = document.getElementById('cevap-input').value.toLowerCase().trim();
         const feedback = document.getElementById('feedback');
-        if(ans.includes("eksen eğikliği")) {
-            feedback.innerHTML = "🌟 <b>Aferin!</b> Doğru cevap: Eksen Eğikliği.";
+        if(ans === "kloroplast") {
+            feedback.innerHTML = "🌟 Aferin! Doğru cevap: Kloroplast.";
             feedback.style.color = "var(--yesil)";
         } else {
             feedback.innerHTML = "❌ Maalesef yanlış, tekrar dene!";
@@ -203,7 +197,7 @@
         }
     }
 
-    // LGS Sayacı
+    // LGS Sayacı (14 Haziran 2026 09:00:00)
     const targetDate = new Date("June 14, 2026 09:00:00").getTime();
     setInterval(function() {
         const now = new Date().getTime();
