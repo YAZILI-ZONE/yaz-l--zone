@@ -218,22 +218,7 @@ function validateAnswer() {
             <button onclick="location.reload()" style="margin-bottom:15px; cursor:pointer; background:#eee; border:none; padding:8px 12px; border-radius:5px;">← Ana Sayfaya Dön</button>
             <h2 style="color:var(--turuncu);">${title}</h2>
             <div style="line-height:1.8; color:#333; background:#fff; padding:25px; border-radius:12px; border:1px solid #eee; font-size:16px;">${text}</div>
-        `;
-    }
-
-    // Günün Sorusu Cevap Kontrolü
-    function validateAnswer() {
-        const ans = document.getElementById('cevap-input').value.toLowerCase().trim();
-        const feedback = document.getElementById('feedback');
-        if(ans === "kloroplast") {
-            feedback.innerHTML = "🌟 Aferin! Doğru cevap: Kloroplast.";
-            feedback.style.color = "var(--yesil)";
-        } else {
-            feedback.innerHTML = "❌ Maalesef yanlış, tekrar dene!";
-            feedback.style.color = "var(--kirmizi)";
-        }
-    }
-
+  
     // LGS Sayacı (14 Haziran 2026 09:00:00)
     const targetDate = new Date("June 14, 2026 09:00:00").getTime();
     setInterval(function() {
