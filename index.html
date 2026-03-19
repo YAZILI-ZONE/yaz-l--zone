@@ -8,53 +8,219 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 
     <style>
-        :root { --turuncu: #ff6f00; --yesil: #2ecc71; --arka-plan: #f4f7f6; --koyu: #2c3e50; --mavi: #3498db; --beyaz: #ffffff; --kirmizi: #e74c3c; --wa-yesil: #25D366; }
-        
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--arka-plan); margin: 0; padding: 0; color: #333; }
-        
-        /* HEADER & HAMBURGER */
-        header { background: var(--turuncu); color: white; padding: 15px; text-align: center; position: relative; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .hamburger { font-size: 30px; cursor: pointer; position: absolute; left: 20px; transition: 0.3s; }
-        .hamburger:hover { color: var(--koyu); }
+        :root {
+            --turuncu: #ff6f00;
+            --yesil: #2ecc71;
+            --arka-plan: #f4f7f6;
+            --koyu-mavi: #2c3e50;
+            --beyaz: #ffffff;
+            --kirmizi: #e74c3c;
+            --wa-yesil: #25D366;
+            --buton-mavi: #3498db;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--arka-plan);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--turuncu);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hamburger {
+            font-size: 28px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
         /* YAN MENÜ (SIDEBAR) */
-        .sidebar { height: 100%; width: 0; position: fixed; z-index: 1000; top: 0; left: 0; background-color: var(--koyu); overflow-x: hidden; transition: 0.3s; padding-top: 60px; }
-        .sidebar a { padding: 15px 25px; text-decoration: none; font-size: 18px; color: #ccc; display: block; border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.2s; }
-        .sidebar a:hover { background: rgba(255,255,255,0.1); color: white; padding-left: 35px; }
-        .close-btn { position: absolute; top: 10px; right: 25px; font-size: 36px; color: white; cursor: pointer; }
-        .wa-menu-link { color: var(--wa-yesil) !important; font-weight: bold; }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: var(--koyu-mavi);
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 20px;
+        }
+
+        .sidebar h3 {
+            color: #ff8c00;
+            font-size: 14px;
+            padding-left: 20px;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #bdc3c7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar a:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .sidebar .wa-link { color: var(--yesil); font-weight: bold; }
+        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
+
+        .iletisim-btn {
+            margin: 30px 20px;
+            padding: 10px;
+            border: 1px solid var(--yesil);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
         /* ANA KONTEYNER */
-        .container { display: flex; gap: 20px; padding: 20px; max-width: 1450px; margin: 0 auto; flex-wrap: wrap; align-items: flex-start; }
-        .column { background: var(--beyaz); border-radius: 15px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); flex: 1; min-width: 320px; box-sizing: border-box; }
-        .middle-col { flex: 2; border-top: 5px solid var(--turuncu); }
-        .left-col { border-top: 5px solid var(--yesil); }
-        .right-col { border-top: 5px solid var(--mavi); }
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
 
-        /* SOL SÜTUN: AKORDİYON SİSTEMİ */
-        .sinif-btn { background: var(--yesil); color: white; width: 100%; padding: 14px; border: none; border-radius: 8px; margin-top: 10px; cursor: pointer; text-align: left; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center; }
-        .ders-panel { display: none; padding: 5px 10px; background: #f0fdf4; border-radius: 0 0 8px 8px; margin-bottom: 10px; border: 1px solid #dcfce7; }
-        .ders-btn { background: #ffffff; border: 1px solid #e2e8f0; width: 100%; padding: 10px; margin: 5px 0; cursor: pointer; text-align: left; font-size: 14px; font-weight: 600; border-radius: 5px; display: flex; justify-content: space-between; }
-        .konu-listesi { display: none; padding-left: 20px; padding-bottom: 10px; }
-        .konu-item { display: block; padding: 6px 0; font-size: 13px; color: #4a5568; text-decoration: none; cursor: pointer; border-bottom: 1px dashed #edf2f7; }
-        .konu-item:hover { color: var(--turuncu); font-weight: bold; }
+        .column { flex: 1; min-width: 300px; box-sizing: border-box; }
+        .middle-col { flex: 2; }
 
-        /* GÜNÜN SORUSU */
-        .gunun-sorusu { margin-top: 30px; padding: 15px; border: 2px solid var(--turuncu); border-radius: 12px; background: #fffcf0; }
-        .gunun-sorusu input { width: 100%; padding: 10px; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box; }
-        .check-btn { background: var(--turuncu); color: white; border: none; padding: 12px; margin-top: 10px; cursor: pointer; width: 100%; border-radius: 5px; font-weight: bold; transition: 0.3s; }
-        .check-btn:hover { opacity: 0.8; }
+        /* KART TASARIMI */
+        .card {
+            background: var(--beyaz);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
 
-        /* DUYURULAR (ORTA) */
-        .duyuru-box { border-radius: 12px; overflow: hidden; border: 1px solid #eee; margin-bottom: 25px; box-shadow: 0 5px 10px rgba(0,0,0,0.03); }
-        .duyuru-img { width: 100%; height: auto; display: block; }
-        .fast-test { background: #ebf8ff; padding: 20px; border-radius: 12px; border: 1px solid #bee3f8; }
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
 
-        /* SAĞ SÜTUN: SAYAÇ & PDF */
-        .sayac-box { background: var(--koyu); color: white; padding: 20px; border-radius: 12px; text-align: center; margin-bottom: 20px; }
-        .timer { font-size: 24px; color: var(--turuncu); font-weight: bold; font-family: 'Courier New', Courier, monospace; letter-spacing: 2px; margin: 10px 0; }
-        .pdf-card { display: flex; align-items: center; justify-content: space-between; background: #f8fafc; padding: 12px; border-radius: 8px; text-decoration: none; color: #334155; margin-bottom: 10px; border: 1px solid #e2e8f0; font-size: 14px; transition: 0.2s; }
-        .pdf-card:hover { border-color: var(--mavi); background: #f1f5f9; transform: translateX(5px); }
+        /* SOL SÜTUN */
+        .sinif-btn {
+            background: var(--yesil);
+            color: white;
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .gunun-sorusu-box {
+            border: 1px solid #ff8c00;
+            border-radius: 12px;
+            padding: 15px;
+            background: #fff;
+        }
+
+        .gunun-sorusu-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .gonder-btn {
+            width: 100%;
+            background: var(--turuncu);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ORTA SÜTUN */
+        .duyuru-img {
+            width: 100%;
+            border-radius: 10px;
+            height: 200px;
+            object-fit: cover;
+            background: #ddd;
+        }
+
+        .test-box {
+            background: #eef7ff;
+            border: 1px solid #cce5ff;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        /* SAĞ SÜTUN */
+        .sayac-card {
+            background: #34495e;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            border-top: 4px solid #3498db;
+        }
+
+        .sayac-timer {
+            font-size: 26px;
+            color: #f39c12;
+            font-weight: bold;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .pdf-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .indir-text { color: var(--kirmizi); font-weight: bold; text-decoration: none; }
 
         @media (max-width: 1000px) { .container { flex-direction: column; } .column { width: 100%; } }
     </style>
@@ -63,173 +229,109 @@
 
 <div id="mySidebar" class="sidebar">
     <span class="close-btn" onclick="closeNav()">&times;</span>
-    <div style="color: var(--turuncu); padding: 10px 25px; font-size: 14px; font-weight: bold;">İÇERİKLER</div>
+    <h3>İçerikler</h3>
     <a href="#">📁 PDF Testler</a>
     <a href="#">📝 Online Yazılılar</a>
     <a href="#">📖 Ders Notları</a>
-    <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" class="wa-menu-link">📱 Yazılı Zone WhatsApp</a>
-    <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;"></div>
-    <a href="mailto:iletisim@yazizone.com" style="color: var(--yesil); font-weight: bold; text-align: center; border: 1px solid; margin: 20px; border-radius: 8px;">📩 İletişim</a>
+    <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" class="wa-link">📱 Yazılı Zone WhatsApp</a>
+    
+    <div class="iletisim-btn">📩 İletişim</div>
 </div>
 
 <header>
     <div class="hamburger" onclick="openNav()">&#9776;</div>
-    <h1 style="margin: 0;">Yazılı Zone</h1>
+    <h1 style="margin:0; font-size: 24px;">Yazılı Zone</h1>
 </header>
 
 <div class="container">
     
-    <div class="column left-col">
-        <h3>📚 Ders Notları</h3>
-        
-        <button class="sinif-btn" onclick="toggleMenu('m8')">8. Sınıf <span>▼</span></button>
-        <div id="m8" class="ders-panel">
-            <button class="ders-btn" onclick="toggleMenu('m8-fen')">Fen Bilimleri <span>+</span></button>
-            <div id="m8-fen" class="konu-listesi">
-                <span class="konu-item" onclick="showNote('Mevsimlerin Oluşumu', 'Dünyanın eksen eğikliği ve güneş etrafındaki dolanımı mevsimleri oluşturur...')">• Mevsimlerin Oluşumu</span>
-                <span class="konu-item" onclick="showNote('DNA ve Genetik Kod', 'Hücre çekirdeği, DNA, Gen ve Nükleotid hiyerarşisi...')">• DNA ve Genetik Kod</span>
-            </div>
-            <button class="ders-btn">Matematik <span>+</span></button>
+    <div class="column">
+        <div class="card" style="border-top: 4px solid var(--yesil);">
+            <div class="card-title">📚 Ders Notları</div>
+            <button class="sinif-btn">8. Sınıf <span>▼</span></button>
+            <button class="sinif-btn">7. Sınıf (Yakında) <span>▼</span></button>
+            <button class="sinif-btn">6. Sınıf (Yakında) <span>▼</span></button>
+            <button class="sinif-btn">5. Sınıf <span>▼</span></button>
         </div>
 
-        <button class="sinif-btn" onclick="toggleMenu('m7')">7. Sınıf <span>▼</span></button>
-        <div id="m7" class="ders-panel"><button class="ders-btn">Fen Bilimleri <span>+</span></button></div>
-
-        <button class="sinif-btn" onclick="toggleMenu('m6')">6. Sınıf <span>▼</span></button>
-        <div id="m6" class="ders-panel"><button class="ders-btn">Matematik <span>+</span></button></div>
-
-        <button class="sinif-btn" onclick="toggleMenu('m5')">5. Sınıf <span>▼</span></button>
-        <div id="m5" class="ders-panel"><button class="ders-btn">Fen Bilimleri <span>+</span></button></div>
-
-        <div class="gunun-sorusu">
-            <h4 style="margin:0; color: var(--turuncu);">💡 Günün Sorusu</h4>
-            <p id="soru-metni" style="font-size: 14px; margin-top: 10px;">Bitki hücresinde fotosentezin yapıldığı organel hangisidir?</p>
+        <div class="gunun-sorusu-box">
+            <div class="card-title" style="color: var(--turuncu); font-size: 14px;">💡 Günün Sorusu</div>
+            <p style="font-size: 13px; margin: 0;">Sıvı halden katı hale geçmeye ne denir?</p>
             <input type="text" id="cevap-input" placeholder="Cevabınızı buraya yazın...">
-            <button class="check-btn" onclick="validateAnswer()">Gönder</button>
-            <p id="feedback" style="font-size: 13px; text-align: center; margin-top: 10px; font-weight: bold;"></p>
+            <button class="gonder-btn" onclick="checkAns()">Gönder</button>
+            <p id="msg" style="font-size: 12px; margin-top: 10px; color: var(--kirmizi); font-weight: bold; display:none;">✘ Maalesef yanlış, tekrar dene!</p>
         </div>
     </div>
 
     <div class="column middle-col">
-        <div id="content-area">
-            <h3>📢 Güncel Duyurular</h3>
-            <div class="duyuru-box">
-                <img src="https://picsum.photos/seed/edu/800/350" class="duyuru-img" alt="Eğitim Görseli">
-                <div style="padding:20px;">
-                    <b style="font-size: 18px;">📱 Yazılı Zone WhatsApp Kanalı Aktif!</b>
-                    <p style="color: #666;">Yeni eklenen ders notları ve yazılı PDF'lerinden anında haberdar olmak için kanalımızı takip etmeyi unutmayın.</p>
-                    <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" style="color: var(--wa-yesil); font-weight: bold; text-decoration: none;">Hemen Katılmak İçin Tıkla →</a>
-                </div>
-            </div>
+        <div class="card" style="border-top: 4px solid var(--turuncu);">
+            <div class="card-title">📢 Güncel Duyurular</div>
+            <img src="https://picsum.photos/seed/edu/800/400" class="duyuru-img">
+            <p style="font-weight: bold; margin-top: 15px;">📱 Yazılı Zone WhatsApp Kanalı Aktif!</p>
+            <p style="font-size: 14px; color: #666;">Yeni eklenen ders notları ve yazılı PDF'lerinden anında haberdar olmak için kanalımızı takip etmeyi unutmayın.</p>
+            <a href="https://whatsapp.com/channel/0029VbCACCv7oQhbMkAbsb2z" target="_blank" style="color: var(--yesil); font-weight: bold; text-decoration: none; font-size: 14px;">Hemen Katılmak İçin Tıkla →</a>
+        </div>
 
-            <div class="fast-test">
-                <h4 style="margin-top: 0;">🎯 5 Soruluk Hızlı Test</h4>
-                <p style="font-size: 14px;">Sınıfını seç ve bilgilerini tazele:</p>
-                <select id="test-select" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #cbd5e0; margin-bottom: 10px;">
-                    <option>8. Sınıf - Fen Bilimleri</option>
-                    <option>7. Sınıf - Matematik</option>
-                    <option>6. Sınıf - Türkçe</option>
-                    <option>5. Sınıf - Sosyal Bilgiler</option>
-                </select>
-                <button class="check-btn" style="background: var(--mavi);">Testi Başlat</button>
-            </div>
+        <div class="test-box">
+            <div class="card-title" style="color: #e67e22;">🎯 5 Soruluk Hızlı Test</div>
+            <p style="font-size: 13px;">Sınıfını seç ve bilgilerini tazele:</p>
+            <select style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; margin-bottom: 10px;">
+                <option>8. Sınıf - Fen Bilimleri</option>
+            </select>
+            <button style="width: 100%; background: var(--buton-mavi); color: white; border: none; padding: 10px; border-radius: 5px; font-weight: bold; cursor: pointer;">Testi Başlat</button>
         </div>
     </div>
 
-    <div class="column right-col">
-        <div class="sayac-box">
-            <div style="font-size: 12px; font-weight: bold; text-transform: uppercase; opacity: 0.8;">⏳ LGS 2026 GERİ SAYIM</div>
-            <div id="countdown" class="timer">00:00:00:00</div>
-            <div style="display: flex; justify-content: space-around; font-size: 9px; opacity: 0.6;">
+    <div class="column">
+        <div class="sayac-card">
+            <div style="font-size: 10px; font-weight: bold; opacity: 0.8;">⏳ LGS 2026 GERİ SAYIM</div>
+            <div id="timer" class="sayac-timer">00:00:00:00</div>
+            <div style="display:flex; justify-content: space-around; font-size: 9px; opacity: 0.7;">
                 <span>GÜN</span><span>SAAT</span><span>DAKİKA</span><span>SANİYE</span>
             </div>
         </div>
 
-        <h3>📥 Yazılı Örnekleri (PDF)</h3>
-        <div style="margin-top: 15px;">
-            <a href="yazili.pdf" download class="pdf-card">
+        <div class="card" style="margin-top: 20px;">
+            <div class="card-title">📥 Yazılı Örnekleri (PDF)</div>
+            
+            <div class="pdf-row">
                 <span>📄 8. Sınıf Matematik 1. Dönem</span>
-                <b style="color: var(--kirmizi);">İNDİR</b>
-            </a>
-            <a href="#" class="pdf-card">
+                <a href="yazili.pdf" download class="indir-text">İNDİR</a>
+            </div>
+
+            <div class="pdf-row">
                 <span>📄 8. Sınıf Fen 1. Dönem</span>
-                <b style="color: var(--kirmizi);">İNDİR</b>
-            </a>
-            <a href="#" class="pdf-card">
+                <a href="#" class="indir-text">İNDİR</a>
+            </div>
+
+            <div class="pdf-row">
                 <span>📄 5. Sınıf Fen 1. Dönem</span>
-                <b style="color: var(--kirmizi);">İNDİR</b>
-            </a>
+                <a href="#" class="indir-text">İNDİR</a>
+            </div>
         </div>
     </div>
 
 </div>
 
 <script>
-// --- GÜNÜN SORUSU SİSTEMİ BAŞLANGICI ---
-const soruHavuzu = [
-    { soru: "Hücrenin enerji santrali hangi organeldir?", cevap: "mitokondri" },
-    { soru: "Mevsimlerin oluşmasının temel sebebi nedir?", cevap: "eksen eğikliği" },
-    { soru: "Bitki hücresinde fotosentezin yapıldığı organel hangisidir?", cevap: "kloroplast" },
-    { soru: "Sıvı halden katı hale geçmeye ne denir?", cevap: "donma" },
-    { soru: "Dünya'nın tek doğal uydusu nedir?", cevap: "ay" }
-];
-
-function gununSorusunuGetir() {
-    const baslangicTarihi = new Date("2024-01-01").getTime(); 
-    const simdi = new Date().getTime();
-    const gunFarki = Math.floor((simdi - baslangicTarihi) / (1000 * 60 * 60 * 24));
-    
-    const soruIndeksi = gunFarki % soruHavuzu.length;
-    const bugununSorususu = soruHavuzu[soruIndeksi];
-
-    document.getElementById('soru-metni').innerText = bugununSorususu.soru;
-    window.dogruCevap = bugununSorususu.cevap;
-}
-
-// Sayfa her açıldığında otomatik çalışması için:
-gununSorusunuGetir();
-
-function validateAnswer() {
-    const kullaniciCevabi = document.getElementById('cevap-input').value.toLowerCase().trim();
-    const feedback = document.getElementById('feedback');
-    
-    if(kullaniciCevabi === window.dogruCevap) {
-        feedback.innerHTML = "🌟 Aferin! Doğru cevap.";
-        feedback.style.color = "var(--yesil)";
-    } else {
-        feedback.innerHTML = "❌ Maalesef yanlış, tekrar dene!";
-        feedback.style.color = "var(--kirmizi)";
-    }
-}
-// --- GÜNÜN SORUSU SİSTEMİ BİTİŞİ ---
-    // Sidebar Menü Kontrolü
-    function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
+    function openNav() { document.getElementById("mySidebar").style.width = "260px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
 
-    // Akordiyon (Açılır-Kapanır) Menü
-    function toggleMenu(id) {
-        var el = document.getElementById(id);
-        el.style.display = (el.style.display === "block") ? "none" : "block";
+    function checkAns() {
+        const msg = document.getElementById("msg");
+        msg.style.display = "block";
     }
 
-    // Orta Panele Not Yükleme
-    function showNote(title, text) {
-        document.getElementById('content-area').innerHTML = `
-            <button onclick="location.reload()" style="margin-bottom:15px; cursor:pointer; background:#eee; border:none; padding:8px 12px; border-radius:5px;">← Ana Sayfaya Dön</button>
-            <h2 style="color:var(--turuncu);">${title}</h2>
-            <div style="line-height:1.8; color:#333; background:#fff; padding:25px; border-radius:12px; border:1px solid #eee; font-size:16px;">${text}</div>
-  
-    // LGS Sayacı (14 Haziran 2026 09:00:00)
-    const targetDate = new Date("June 14, 2026 09:00:00").getTime();
-    setInterval(function() {
+    // LGS SAYAÇ FONKSİYONU
+    const target = new Date("June 14, 2026 09:00:00").getTime();
+    setInterval(() => {
         const now = new Date().getTime();
-        const dist = targetDate - now;
-        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
-        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((dist % (1000 * 60)) / 1000);
-        document.getElementById("countdown").innerHTML = 
-            (d<10?'0'+d:d) + ":" + (h<10?'0'+h:h) + ":" + (m<10?'0'+m:m) + ":" + (s<10?'0'+s:s);
+        const diff = target - now;
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerHTML = `${d<10?'0'+d:d}:${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
     }, 1000);
 </script>
 
