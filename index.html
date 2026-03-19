@@ -165,6 +165,43 @@
 </div>
 
 <script>
+// --- GÜNÜN SORUSU SİSTEMİ BAŞLANGICI ---
+const soruHavuzu = [
+    { soru: "Hücrenin enerji santrali hangi organeldir?", cevap: "mitokondri" },
+    { soru: "Mevsimlerin oluşmasının temel sebebi nedir?", cevap: "eksen eğikliği" },
+    { soru: "Bitki hücresinde fotosentezin yapıldığı organel hangisidir?", cevap: "kloroplast" },
+    { soru: "Sıvı halden katı hale geçmeye ne denir?", cevap: "donma" },
+    { soru: "Dünya'nın tek doğal uydusu nedir?", cevap: "ay" }
+];
+
+function gununSorusunuGetir() {
+    const baslangicTarihi = new Date("2024-01-01").getTime(); 
+    const simdi = new Date().getTime();
+    const gunFarki = Math.floor((simdi - baslangicTarihi) / (1000 * 60 * 60 * 24));
+    
+    const soruIndeksi = gunFarki % soruHavuzu.length;
+    const bugununSorususu = soruHavuzu[soruIndeksi];
+
+    document.getElementById('soru-metni').innerText = bugununSorususu.soru;
+    window.dogruCevap = bugununSorususu.cevap;
+}
+
+// Sayfa her açıldığında otomatik çalışması için:
+gununSorusunuGetir();
+
+function validateAnswer() {
+    const kullaniciCevabi = document.getElementById('cevap-input').value.toLowerCase().trim();
+    const feedback = document.getElementById('feedback');
+    
+    if(kullaniciCevabi === window.dogruCevap) {
+        feedback.innerHTML = "🌟 Aferin! Doğru cevap.";
+        feedback.style.color = "var(--yesil)";
+    } else {
+        feedback.innerHTML = "❌ Maalesef yanlış, tekrar dene!";
+        feedback.style.color = "var(--kirmizi)";
+    }
+}
+// --- GÜNÜN SORUSU SİSTEMİ BİTİŞİ ---
     // Sidebar Menü Kontrolü
     function openNav() { document.getElementById("mySidebar").style.width = "280px"; }
     function closeNav() { document.getElementById("mySidebar").style.width = "0"; }
